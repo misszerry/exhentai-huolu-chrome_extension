@@ -1,0 +1,110 @@
+.tag {
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1rem;
+    width: 100%;
+    height: 100%;
+    font-family: Microsoft JhengHei;
+    font-weight: 500;
+    z-index: -1;
+    cursor: default;
+    overflow-y: auto;
+}
+
+.tagbtn {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    text-align: center;
+    display: none;
+    width: 100%;
+    height: 20%;
+    outline: none;
+    border: none;
+    font-family: Microsoft JhengHei;
+    background-color: #fcad26;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tagspan {
+    display: inline-block;
+    border: 2px solid yellow;
+    padding: 3px;
+    color:white;
+    font-weight: 400;
+    margin:1px;
+}
+
+.load {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    font-family: Microsoft JhengHei;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.imgSize {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.animate {
+    transition:all 0.5s;
+}
+
+.tagDisplay {
+    opacity : 1;
+    z-index : 1;
+}
+
+.tagUnDisplay{
+    opacity : 0;
+    z-index : -1;
+}
+
+.filter{
+    position: fixed;
+    bottom:10%;
+    right:5%;
+    width:200px;
+}
+
+.loader {
+    margin: 0 auto;
+    width: 20px;
+    height: 20px;
+    border: 6px solid #bdc3c7;
+    border-bottom-color: #1abc9c;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: coloredspin 4s linear infinite;
+}
+
+@keyframes coloredspin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        border-bottom-color: #2ecc71;
+        border-top-color: #2ecc71;
+    }
+    50% {
+        transform: rotate(360deg) scale(1.1);
+        border-bottom-color: #3498db;
+        border-top-color: #3498db;
+    }
+    75% {
+        border-bottom-color: #9d59b6;
+        border-top-color: #9d59b6;
+    }
+    100% {
+        transform: rotate(720deg) scale(1);
+    }
+}

@@ -1,0 +1,35 @@
+body{
+    width:200px;
+    background-color: bisque;
+}
+h1{
+    background-color: bisque;
+    font-size: 33px;
+    font-family: Microsoft JhengHei;
+    font-weight: 700;
+    text-align: center;
+    color:brown;
+    margin:10px 0;
+}
+p{
+    font-family: Microsoft JhengHei;
+}
+#open,#close{
+    width:97px;
+    height:97px;
+    font-size: 30px;
+    font-family: Microsoft JhengHei;
+    font-weight: 500;
+}
+#setLastTime{
+    font-size: 18px;
+    font-family: Microsoft JhengHei;
+    font-weight: 300;
+}
+#manuel,#config{
+    width:97px;
+    height:60px;
+    font-size: 18px;
+    font-family: Microsoft JhengHei;
+    font-weight: 300;
+}

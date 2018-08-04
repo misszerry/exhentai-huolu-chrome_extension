@@ -1,0 +1,78 @@
+body {
+    border:2px solid black;
+    max-width: 1200px;
+    margin: auto;
+    white-space: nowrap;
+    font-family: "Microsoft JhengHei";
+}
+img{
+    position: relative;
+    height:100px;
+    margin:auto;
+}
+form{
+    width:150px;
+    margin: auto;
+    text-align: center;
+}
+h1 {
+    margin:5px;
+    font-size: 40px;
+    text-align: center
+}
+h2{
+    font-size:35px;
+    margin: 5px 0;
+}
+h3{
+    margin: 5px 0;
+}
+h4 {
+    font-size:25px;
+    padding: 0;
+    margin: 5px 0;
+}
+button{
+    margin:5px 0;
+}
+p{
+    text-align: center
+}
+#del {
+    display: block;
+    width:100px;
+    margin: auto;
+    text-align: center;
+}
+.title{
+    text-align: center;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.box{
+    flex:1 1 200px;
+    padding:20px;
+    text-align: center
+}
+.select{
+    text-align: center;
+}
+.imgBox{
+    width:100px;
+    height:100px;
+    margin:0;
+}
+#stags,#sUPs{
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    max-height: 500px;
+    overflow-y:auto;
+}
+.cleared{
+    color:red;
+    font-size: 16px;
+    border:1px solid red;
+}

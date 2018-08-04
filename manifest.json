@@ -1,0 +1,77 @@
+{
+    "manifest_version": 2,
+    "name": "E/ExHentai活路套件(新上傳標亮、Tags預覽、自訂屏蔽)",
+    "description": "提供於E-Hentai/ExHentai顯示語言圖標、Tags預覽、封面屏蔽等功能",
+    "version": "1.50",
+    "browser_action": {
+        "default_icon": "res/icon48.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": ["storage","https://exhentai.org/*"],
+    "background": {
+        "scripts": ["events.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches":["https://exhentai.org/"],
+            "js":["redirect.js"],
+            "run_at":"document_start"
+        },
+        {
+            "matches": ["*://exhentai.org/*", "*://e-hentai.org/*"],
+            "exclude_matches": [
+                "https://exhentai.org/g/*",
+                "https://exhentai.org/torrents*",
+                "https://exhentai.org/uconfig*",
+                "https://exhentai.org/upload/manage*",
+                "https://exhentai.org/s*",
+                "https://exhentai.org/gallerypopups*",
+                "https://exhentai.org/archiver*",
+                "https://exhentai.org/gallerytorrents*",
+                "https://e-hentai.org/g/*",
+                "https://e-hentai.org/torrents*",
+                "https://e-hentai.org/uconfig*",
+                "https://e-hentai.org/upload/manage*",
+                "https://e-hentai.org/s*",
+                "https://e-hentai.org/home*",
+                "https://e-hentai.org/toplist*",
+                "https://e-hentai.org/bounty*",
+                "https://e-hentai.org/news*",
+                "https://e-hentai.org/gallerypopups*",
+                "https://e-hentai.org/archiver*",
+                "https://e-hentai.org/gallerytorrents*",
+                "https://e-hentai.org/lofi*",
+                "https://e-hentai.org/tos*",
+                "https://e-hentai.org/stats*"
+            ],
+            "css": ["style.css"],
+            "js": ["data.js", "main.js"]
+        }
+    ],
+    "icons": {
+        "16": "res/icon16.png",
+        "48": "res/icon48.png",
+        "128": "res/icon128.png"
+    },
+    "options_page": "options.html",
+    "web_accessible_resources": [
+        "res/GitHub-Mark-64px.png",
+        "res/default.jpg",
+        "res/lanIcon/jp.png",
+        "res/lanIcon/cn.png",
+        "res/lanIcon/en.png",
+        "res/lanIcon/kr.png",
+        "res/lanIcon/netherlands.png",
+        "res/lanIcon/france.png",
+        "res/lanIcon/germany.png",
+        "res/lanIcon/hungary.png",
+        "res/lanIcon/italy.png",
+        "res/lanIcon/poland.png",
+        "res/lanIcon/portugal.png",
+        "res/lanIcon/russia.png",
+        "res/lanIcon/spain.png",
+        "res/lanIcon/thai.png",
+        "res/lanIcon/vietnam.png"
+    ]
+}
