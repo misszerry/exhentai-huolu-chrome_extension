@@ -1,6 +1,8 @@
 # E/Exhentai Huolu (chrome extension) | E/Exhentai 活路套件
-This is a chrome extension for e/ex-hentai user.
-這是一個為e/exhentai用戶打造的chrome擴充功能
+This is a chrome extension for e/ex-hentai user.   
+這是一個為e/exhentai用戶打造的chrome擴充功能   
+**Please use Thumbnails mode on e/exhentai while running this extension**   
+**使用本程式請使用Thumbnails瀏覽模式**
 ![image](https://github.com/chuang861012/exhentai-huolu-chrome_extension/blob/master/README%20resource/demo.gif)
 # Features | 功能
 List of main features
