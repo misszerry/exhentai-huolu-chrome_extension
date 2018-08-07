@@ -36,7 +36,9 @@ button{
     margin:5px 0;
 }
 p{
-    text-align: center
+    text-align: center;
+    margin:0;
+    padding:.5rem;
 }
 #del {
     display: block;
@@ -59,10 +61,15 @@ p{
 .select{
     text-align: center;
 }
+.imgBox:hover{
+    background-color: rgba(200,200,200,.2);
+}
 .imgBox{
-    width:100px;
-    height:100px;
-    margin:0;
+    max-width:20rem;
+    margin:1rem;
+    border:3px #ee5253 solid;
+    border-radius: 3px;
+    background-color: rgba(50,50,50,.2);
 }
 #stags,#sUPs{
     display: flex;
@@ -70,6 +77,8 @@ p{
     flex-wrap:wrap;
     max-height: 500px;
     overflow-y:auto;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 .cleared{
     color:red;

@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>活路選項</title>
-    <script src="lib/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="lib/bootstrap.css">
     <link rel="stylesheet" href="option.css">
 </head>
@@ -34,21 +33,21 @@
     <div class="container">
         <div class="box">
             <h2>Tags</h2>
-            <input id="taginput" type="text" placeholder="請輸入tag名稱" class="form-control"><br>
-            <input id="tagurl" type="text" placeholder="請輸入圖片網址" class="form-control"><br>
-            <input id="confirm-del-tag" type="submit" value="完全屏蔽(直接不顯示)" class="btn btn-primary" style="cursor: pointer">
-            <input id="confirmtag" type="submit" value="封面屏蔽" class="btn btn-primary" style="cursor: pointer">
-            <button id="removetag" class="btn btn-danger" style="cursor: pointer">移除</button>
+            <form action="">
+                <input id="taginput" type="text" placeholder="輸入tag" class="form-control"><br>
+                <input id="confirm-del-tag" type="submit" value="屏蔽" class="btn btn-primary" style="cursor: pointer">
+                <button id="removetag" class="btn btn-danger" style="cursor: pointer">移除</button>
+            </form>
             <h4>屏蔽中Tags</h4>
             <div id="stags"></div>
         </div>
         <div class="box">
             <h2>Uploaders</h2>
-            <input id="UPinput" type="text" placeholder="請輸入uploader名稱" class="form-control"><br>
-            <input id="UPurl" type="text" placeholder="請輸入圖片網址" class="form-control"><br>
-            <input id="confirm-del-up" type="submit" value="完全屏蔽(直接不顯示)" class="btn btn-primary" style="cursor: pointer">
-            <input id="confirmUP" type="submit" value="封面屏蔽" class="btn btn-primary" style="cursor: pointer">
-            <button id="removeUP" class="btn btn-danger" style="cursor: pointer">移除</button>
+            <form>
+                <input id="UPinput" type="text" placeholder="輸入uploader" class="form-control"><br>
+                <input id="confirm-del-up" type="submit" value="屏蔽" class="btn btn-primary" style="cursor: pointer">
+                <button id="removeUP" class="btn btn-danger" style="cursor: pointer">移除</button>
+            </form>
             <h4>屏蔽中Uploaders</h4>
             <div id="sUPs"></div>
         </div>

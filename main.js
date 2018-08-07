@@ -14,7 +14,6 @@ const divs4 = document.querySelectorAll("div.id4");
 const galleryTitle = document.querySelectorAll("div.id2 a"); 
 const as = document.querySelectorAll("div.id3 a"); 
 const gdata = [];
-const image = document.querySelectorAll("div.id3 a img"); 
 const tags = [];
 const uploaders = [];
 const postedTime = [];
@@ -34,7 +33,6 @@ chrome.storage.sync.get(null,
         if (run) {
             transSwitch = list.trans;
             highLightSwitch = list.highLightSwitch;
-            document.removeEventListener("click", event);
             init()
         }
     });
@@ -73,49 +71,32 @@ function render() {
     const tagsLength = tags.length;
     for (let i = 0; i < tagsLength; i++) {
         let flaged = false;
+        let card = document.createElement("div");
+        card.classList.add("card");
+        galleryList.appendChild(card);
+        card.appendChild(divs[i]);
+        divs[i].classList.add("card-front")
         //新增視窗
-        let tagDisplay = document.createElement("a");
+        let tagDisplay = document.createElement("div");
         tagDisplay.classList.add("tag");
-        divs[i].appendChild(tagDisplay);
+        tagDisplay.classList.add("card-back");
+        tagDisplay.classList.add("rotate180");
+        card.appendChild(tagDisplay);
         //style
         divs[i].style.position = "relative";
-        //設定動畫
-        tagDisplay.classList.add("tagUnDisplay");
-        tagDisplay.classList.add("animate");
-        divs2[i].classList.add("animate");
-        divs3[i].classList.add("animate");
-        divs4[i].classList.add("animate");
-        //加入button
-        let tagbtn = document.createElement("button");
-        tagbtn.classList.add("tagbtn");
-        tagbtn.textContent = "顯示tag";
-        divs[i].appendChild(tagbtn);
-        //點擊button顯示tag
-        tagbtn.addEventListener("click", () => {
-            tagDisplay.classList.add("tagDisplay");
-            tagDisplay.classList.remove("tagUnDisplay");
-            divs2[i].style.opacity = 0;
-            divs3[i].style.opacity = 0;
-            divs4[i].style.opacity = 0;
-            tagbtn.style.opacity = 0;
-            //修正favorites裡點擊會觸發重新整理頁面的問題
-            window.event.returnValue = false;
+        tagDisplay.style.maxHeight = divs[i].style.height;
+
+        card.addEventListener("mouseenter",()=>{
+            divs[i].classList.add("rotate-180");
+            tagDisplay.classList.remove("rotate180")
         });
-        //雙擊tags回復狀態
-        tagDisplay.addEventListener("dblclick", () => {
-            tagDisplay.classList.add("tagUnDisplay");
-            tagDisplay.classList.remove("tagDisplay");
-            divs2[i].style.opacity = 1;
-            divs3[i].style.opacity = 1;
-            divs4[i].style.opacity = 1;
-            tagbtn.style.opacity = 1;
+        card.addEventListener("mouseleave",()=>{
+            divs[i].classList.remove("rotate-180");
+            tagDisplay.classList.add("rotate180");
         });
-        //設定hover後出現button
-        divs[i].addEventListener("mouseover", () => {
-            tagbtn.style.display = "block";
-        });
-        divs[i].addEventListener("mouseout", () => {
-            tagbtn.style.display = "none";
+        card.addEventListener("click",()=>{
+            divs[i].classList.toggle("rotate-180");
+            tagDisplay.classList.toggle("rotate180");
         });
         //內容文字
         if (tags[i].length === 0) {
@@ -153,23 +134,45 @@ function render() {
             tagType = thisTagType;
             //屏蔽
             chrome.storage.sync.get("Uploaders", (list) => {
+                if (divs[i].classList.contains("field-front")){
+                    return
+                }
                 if (list.Uploaders[uploaders[i]]) {
-                    if (list.Uploaders[uploaders[i]] === "clear") {
-                        galleryList.removeChild(divs[i]);
-                        return;
-                    }
-                    image[i].src = list.Uploaders[uploaders[i]];
-                    image[i].classList.add("imgSize");
+                    divs[i].classList.add("field-front");
+                    tagDisplay.classList.add("field-back")
+
+                    btn = document.createElement('div');
+                    btn.innerHTML = `已屏蔽此漫畫<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
+                    btn.classList.add("field-btn");
+                    btn.addEventListener('click',function(){
+                        divs[i].classList.remove("field-front");
+                        tagDisplay.classList.remove("field-back")
+                        divs[i].classList.toggle("rotate-180");
+                        tagDisplay.classList.toggle("rotate180");
+                        this.remove();
+                    });
+                    card.appendChild(btn);
                 }
             });
             chrome.storage.sync.get("tags", (list) => {
+                if (divs[i].classList.contains("field-front")){
+                    return
+                }
                 if (list.tags[temp]) {
-                    if (list.tags[temp] === "clear") {
-                        galleryList.removeChild(divs[i]);
-                        return;
-                    }
-                    image[i].src = list.tags[temp];
-                    image[i].classList.add("imgSize");
+                    divs[i].classList.add("field-front");
+                    tagDisplay.classList.add("field-back")
+
+                    btn = document.createElement('div');
+                    btn.innerHTML = `已屏蔽此漫畫<p class="field-span">tag : ${temp}</p>點此確認`;
+                    btn.classList.add("field-btn");
+                    btn.addEventListener('click',function(){
+                        divs[i].classList.remove("field-front");
+                        tagDisplay.classList.remove("field-back")
+                        divs[i].classList.toggle("rotate-180");
+                        tagDisplay.classList.toggle("rotate180");
+                        this.remove();
+                    });
+                    card.appendChild(btn);
                 }
             });
             //翻譯

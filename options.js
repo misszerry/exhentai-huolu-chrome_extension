@@ -54,21 +54,7 @@ function init() {
             text.textContent = tag;
             text.className = "tag";
             text.style.cursor = "pointer";
-            if (list.tags[Object.keys(list.tags)[i]] === "clear") {
-                let cleared = document.createElement("p");
-                cleared.textContent = "完全屏蔽中";
-                cleared.className = "cleared";
-                tagBox.appendChild(text);
-                tagBox.appendChild(cleared);
-                tagdis.appendChild(tagBox);
-                continue;
-            }
-            let taga = document.createElement("img");
-            taga.src = list.tags[Object.keys(list.tags)[i]];
-            taga.style.maxHeight = "50px";
-            taga.style.maxWidth = "50px";
             tagBox.appendChild(text);
-            tagBox.appendChild(taga);
             tagdis.appendChild(tagBox);
         }
         for (let i = 0; i < Object.keys(list.Uploaders).length; i++) {
@@ -79,21 +65,7 @@ function init() {
             text.textContent = Uploader;
             text.className = "Uploader";
             text.style.cursor = "pointer";
-            if (list.Uploaders[Object.keys(list.Uploaders)[i]] === "clear") {
-                let cleared = document.createElement("p");
-                cleared.textContent = "完全屏蔽中";
-                cleared.className = "cleared";
-                upBox.appendChild(text);
-                upBox.appendChild(cleared);
-                Updis.appendChild(upBox);
-                continue;
-            }
-            let Upa = document.createElement("img");
-            Upa.src = list.Uploaders[Object.keys(list.Uploaders)[i]];
-            Upa.style.maxHeight = "50px";
-            Upa.style.maxWidth = "50px";
             upBox.appendChild(text);
-            upBox.appendChild(Upa);
             Updis.appendChild(upBox);
         }
         //設定雙擊刪除
@@ -135,20 +107,6 @@ function init() {
 }
 //初始化
 init();
-//新增tag
-document.getElementById("confirmtag").onclick = () => {
-    let text = document.getElementById('taginput').value;
-    let url = document.getElementById('tagurl').value;
-    chrome.storage.sync.get("tags",
-        (list) => {
-            let temp = list.tags;
-            temp[text] = url || defaulturl;
-            chrome.storage.sync.set({
-                tags: temp
-            })
-        });
-    location.reload();
-};
 //新增完全屏蔽tag
 document.getElementById("confirm-del-tag").onclick = () => {
     let text = document.getElementById('taginput').value;
@@ -160,21 +118,6 @@ document.getElementById("confirm-del-tag").onclick = () => {
                 tags: temp
             })
         });
-    location.reload();
-};
-//新增uploader
-document.getElementById("confirmUP").onclick = () => {
-    let text = document.getElementById('UPinput').value;
-    let url = document.getElementById('UPurl').value;
-    chrome.storage.sync.get("Uploaders",
-        (list) => {
-            let temp = list.Uploaders;
-            temp[text] = url || defaulturl;
-            chrome.storage.sync.set({
-                Uploaders: temp
-            })
-        });
-    location.reload();
 };
 //新增完全屏蔽uploader
 document.getElementById("confirm-del-up").onclick = () => {
@@ -187,7 +130,6 @@ document.getElementById("confirm-del-up").onclick = () => {
                 Uploaders: temp
             })
         });
-    location.reload();
 };
 //移除tag
 document.getElementById("removetag").onclick = () => {
