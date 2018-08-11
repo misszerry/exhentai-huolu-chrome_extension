@@ -27,9 +27,9 @@ e-hentai also provides Exclude Uploaders setting. (settings - Excluded Uploaders
 e-hentai官方另有內建的屏蔽上傳者功能，請多多利用 (settings - Excluded Uploaders)
 ## Tag display | 標籤顯示
 Display the tags of the gallery at the searching area.   
-Click the display button to display all tags and **Double click** to cancel displaying.   
+Click the display button to display.
 在搜尋頁面顯示漫畫的所有標籤   
-點擊顯示tag即可顯示，**雙擊**顯示區塊返回。
+點擊按鈕切換顯示tag
 
 # Install extension | 安裝擴充功能
 Free download:[Chrome Web Store - Extensions](https://chrome.google.com/webstore/detail/eexhentai%E6%B4%BB%E8%B7%AF%E5%A5%97%E4%BB%B6%E6%96%B0%E4%B8%8A%E5%82%B3%E6%A8%99%E4%BA%AE%E3%80%81tags%E9%A0%90%E8%A6%BD/kjciejplcemabaonmonjjjbloofpeena)

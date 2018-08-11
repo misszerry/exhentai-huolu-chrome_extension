@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "name": "E/ExHentai活路套件(新上傳標亮、Tags預覽、自訂屏蔽)",
     "description": "提供於E-Hentai/ExHentai顯示語言圖標、Tags預覽、封面屏蔽等功能",
-    "version": "1.50",
+    "version": "1.60",
     "browser_action": {
         "default_icon": "res/icon48.png",
-        "default_popup": "popup.html"
+        "default_popup": "popup/popup.html"
     },
     "permissions": ["storage","https://exhentai.org/*"],
     "background": {
@@ -54,7 +54,7 @@
         "48": "res/icon48.png",
         "128": "res/icon128.png"
     },
-    "options_page": "options.html",
+    "options_page": "options/options.html",
     "web_accessible_resources": [
         "res/GitHub-Mark-64px.png",
         "res/default.jpg",

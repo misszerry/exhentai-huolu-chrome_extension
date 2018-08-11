@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Popup</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../lib/bootstrap.css">
+    <link rel="stylesheet" href="popup.css">
+    <script src="../lib/bootstrap.js"></script>
+</head>
+
+<body>
+    <h1>功能開關</h1>
+    <div>
+        <button id="open" class="btn btn-outline-primary active">開啟</button>
+        <button id="close" class="btn btn-outline-danger">關閉</button>
+    </div>
+    <h1>瀏覽
+        <br> 時間更新</h1>
+    <div>
+        <button id="setLastTime" class="btn btn-lg btn-success" style="width:100%">手動同步</button>
+        <p style="font-size: 10px;text-align: center">瀏覽到最後一個標亮時會自動同步
+            <br> 第一次使用請注意:
+            <br>請在進入e/exhentai後手動更新一次</p>
+    </div>
+    <h1>說明與設定</h1>
+    <div>
+        <a href="../manuel/manuel.html">
+            <button id="manuel" type="button" class="btn btn-secondary">使用說明</button>
+        </a>
+        <button id="config" type="button" class="btn btn-secondary">功能設定</button>
+    </div>
+    <p>目前版本:1.60
+        <a href="updateLog.html">版本更新履歷</a>
+    </p>
+    <a href="https://github.com/chuang861012/exhentai-huolu-chrome_extension" target="_blank">
+        <img src="../res/GitHub-Mark-64px.png" style="display:block;margin:auto;margin-bottom:1rem">
+    </a>
+</body>
+<script src="popup.js"></script>
+
+</html>

@@ -84,19 +84,39 @@ function render() {
         card.appendChild(tagDisplay);
         //style
         divs[i].style.position = "relative";
-        tagDisplay.style.maxHeight = divs[i].style.height;
+        max_height = divs[i].style.height.match(/\d+/);
+        tagDisplay.style.maxHeight = Number(max_height)+5+"px";
+        //新增按鈕
+        switchBtn = document.createElement("button");
+        switchBtn.classList.add("tagBtn");
+        switchBtn.textContent = "顯示tag"
+        switchBtn.classList.add("fade-out");
+        card.appendChild(switchBtn);
 
-        card.addEventListener("mouseenter",()=>{
-            divs[i].classList.add("rotate-180");
-            tagDisplay.classList.remove("rotate180")
-        });
-        card.addEventListener("mouseleave",()=>{
-            divs[i].classList.remove("rotate-180");
-            tagDisplay.classList.add("rotate180");
-        });
-        card.addEventListener("click",()=>{
+        switchBtn.addEventListener("click",function(){
             divs[i].classList.toggle("rotate-180");
-            tagDisplay.classList.toggle("rotate180");
+            tagDisplay.classList.toggle("rotate180")
+            if(tagDisplay.classList.contains("rotate180")){
+                this.textContent = "顯示tag"
+            }else{
+                this.textContent = "返回封面"
+            }
+        });
+
+        card.addEventListener("mouseenter",function(){
+            this.querySelector('.tagBtn').style.display = "block";
+            setTimeout(()=>{
+                this.querySelector('.tagBtn').classList.remove("fade-out");
+                this.querySelector('.tagBtn').classList.add("fade-in");
+            },.000001)
+            
+        });
+        card.addEventListener("mouseleave",function(){
+            this.querySelector('.tagBtn').style.display = "none";
+            setTimeout(()=>{
+                this.querySelector('.tagBtn').classList.add("fade-out");
+                this.querySelector('.tagBtn').classList.remove("fade-in");
+            },.000001)
         });
         //內容文字
         if (tags[i].length === 0) {
@@ -134,42 +154,36 @@ function render() {
             tagType = thisTagType;
             //屏蔽
             chrome.storage.sync.get("Uploaders", (list) => {
-                if (divs[i].classList.contains("field-front")){
+                if (divs[i].classList.contains("rotate-180")){
                     return
                 }
                 if (list.Uploaders[uploaders[i]]) {
-                    divs[i].classList.add("field-front");
-                    tagDisplay.classList.add("field-back")
+                    divs[i].classList.add("rotate-180");
+                    tagDisplay.classList.remove("rotate180")
+                    card.querySelector('.tagBtn').textContent = "返回封面";
 
                     btn = document.createElement('div');
-                    btn.innerHTML = `已屏蔽此漫畫<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
+                    btn.innerHTML = `屏蔽警告<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click',function(){
-                        divs[i].classList.remove("field-front");
-                        tagDisplay.classList.remove("field-back")
-                        divs[i].classList.toggle("rotate-180");
-                        tagDisplay.classList.toggle("rotate180");
                         this.remove();
                     });
                     card.appendChild(btn);
                 }
             });
             chrome.storage.sync.get("tags", (list) => {
-                if (divs[i].classList.contains("field-front")){
+                if (divs[i].classList.contains("rotate-180")){
                     return
                 }
                 if (list.tags[temp]) {
-                    divs[i].classList.add("field-front");
-                    tagDisplay.classList.add("field-back")
+                    divs[i].classList.add("rotate-180");
+                    tagDisplay.classList.remove("rotate180")
+                    card.querySelector('.tagBtn').textContent = "返回封面";
 
                     btn = document.createElement('div');
-                    btn.innerHTML = `已屏蔽此漫畫<p class="field-span">tag : ${temp}</p>點此確認`;
+                    btn.innerHTML = `屏蔽警告<p class="field-span">tag : ${temp}</p>點此確認`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click',function(){
-                        divs[i].classList.remove("field-front");
-                        tagDisplay.classList.remove("field-back")
-                        divs[i].classList.toggle("rotate-180");
-                        tagDisplay.classList.toggle("rotate180");
                         this.remove();
                     });
                     card.appendChild(btn);

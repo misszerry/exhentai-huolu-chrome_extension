@@ -570,7 +570,7 @@ const tData={
     "arabic":"阿拉伯語",
     "caption":"自製標題",
     "catalan":"加泰羅尼亞語",
-    "chinese":"漢語",
+    "chinese":"中文",
     "czech":"捷克語",
     "danish":"丹麥語",
     "dutch":"荷蘭語",
