@@ -93,7 +93,8 @@ function render() {
         switchBtn.classList.add("fade-out");
         card.appendChild(switchBtn);
 
-        switchBtn.addEventListener("click",function(){
+        switchBtn.addEventListener("click",function(e){
+            e.preventDefault(); // 暫時避免頁面被莫名重整
             divs[i].classList.toggle("rotate-180");
             tagDisplay.classList.toggle("rotate180")
             if(tagDisplay.classList.contains("rotate180")){
