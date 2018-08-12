@@ -86,6 +86,13 @@ function render() {
         divs[i].style.position = "relative";
         max_height = divs[i].style.height.match(/\d+/);
         tagDisplay.style.maxHeight = Number(max_height)+5+"px";
+        if(location.href.match("exhentai")){
+            tagDisplay.style.background = "#43464e";
+            tagDisplay.style.border = "1px solid #34353b";
+        }else if(location.href.match("e-hentai")){
+            tagDisplay.style.background = "#F2EFDF";
+            tagDisplay.style.border = "1px solid #E3E0D1";
+        }
         //新增按鈕
         switchBtn = document.createElement("button");
         switchBtn.classList.add("tagBtn");
@@ -113,11 +120,9 @@ function render() {
             
         });
         card.addEventListener("mouseleave",function(){
+            this.querySelector('.tagBtn').classList.add("fade-out");
+            this.querySelector('.tagBtn').classList.remove("fade-in");
             this.querySelector('.tagBtn').style.display = "none";
-            setTimeout(()=>{
-                this.querySelector('.tagBtn').classList.add("fade-out");
-                this.querySelector('.tagBtn').classList.remove("fade-in");
-            },.000001)
         });
         //內容文字
         if (tags[i].length === 0) {

@@ -86,8 +86,6 @@
     cursor: default;
     overflow-y:auto;
     border-radius: 9px;
-    border: 1px solid #34353b; 
-    background: #43464e;
     position: absolute;
     top:3px;
     left: 4px;
