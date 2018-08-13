@@ -1,22 +1,11 @@
 /* data fields */
 let transSwitch; // 翻譯開關
 let highLightSwitch; // 標亮開關
-let fielded = true;
 let time; // 歷史讀到的最新時間
 let readTime; // 本頁最新時間
 let maxTime;
 let minTime;
-const galleryList = document.querySelector(".itg");
-const divs = document.querySelectorAll("div.id1"); 
-const divs2 = document.querySelectorAll("div.id2"); 
-const divs3 = document.querySelectorAll("div.id3"); 
-const divs4 = document.querySelectorAll("div.id4"); 
-const galleryTitle = document.querySelectorAll("div.id2 a"); 
-const as = document.querySelectorAll("div.id3 a"); 
-const gdata = [];
-const tags = [];
-const uploaders = [];
-const postedTime = [];
+const as = document.querySelectorAll("div.id3 a");
 /* main program */
 //全體開關
 chrome.storage.sync.get(null,
@@ -39,87 +28,88 @@ chrome.storage.sync.get(null,
 
 async function init() {
     //Loading視覺化
-    const load = document.createElement("div");
-    const loader = document.createElement("div");
-    const loadText = document.createElement("p");
-    loadText.textContent = "活路載入中";
-    load.classList.add("load");
-    loader.classList.add("loader");
-    load.appendChild(loadText);
-    load.appendChild(loader);
-    document.body.appendChild(load);
+    addLoader();
 
     //取得各gallery的gid與token
+    let all_request_data = []
     as.forEach(e => {
         const gid = e.href.split("/")[4];
         const token = e.href.split("/")[5];
-        gdata.push([gid,token])
+        all_request_data.push([gid, token])
     });
-    while(gdata.length>25){
-        await getGalleryData(gdata.slice(0,25));
-        gdata.splice(0,25);
+    const gdata = {
+        tags: [],
+        uploaders: [],
+        postedTime: []
+    };
+    while (all_request_data.length > 0) {
+        let req_data;
+        if (all_request_data.length > 25) {
+            req_data = all_request_data.slice(0, 25)
+            all_request_data.splice(0, 25);
+        } else {
+            req_data = all_request_data;
+            all_request_data = []
+        }
+        const res = await getGalleryData(req_data);
+        gdata.tags = gdata.tags.concat(res.tags);
+        gdata.uploaders = gdata.uploaders.concat(res.uploaders);
+        gdata.postedTime = gdata.postedTime.concat(res.postedTime);
     }
-    await getGalleryData(gdata);
-    render()
+    // render page
+    render(gdata)
 }
 
-//繼續主程式
-function render() {
+//render主程式
+function render(gdata) {
+    const divs = document.querySelectorAll("div.id1");
+    const galleryTitle = document.querySelectorAll("div.id2 a");
+
+    const tags = gdata.tags;
+    const uploaders = gdata.uploaders;
+    const postedTime = gdata.postedTime;
     maxTime = postedTime[0];
     minTime = postedTime[0];
     //設定浮動視窗
-    const tagsLength = tags.length;
-    for (let i = 0; i < tagsLength; i++) {
-        let flaged = false;
-        let card = document.createElement("div");
-        card.classList.add("card");
-        galleryList.appendChild(card);
-        card.appendChild(divs[i]);
-        divs[i].classList.add("card-front")
-        //新增視窗
-        let tagDisplay = document.createElement("div");
-        tagDisplay.classList.add("tag");
-        tagDisplay.classList.add("card-back");
-        tagDisplay.classList.add("rotate180");
-        card.appendChild(tagDisplay);
-        //style
-        divs[i].style.position = "relative";
-        max_height = divs[i].style.height.match(/\d+/);
-        tagDisplay.style.maxHeight = Number(max_height)+5+"px";
-        if(location.href.match("exhentai")){
-            tagDisplay.style.background = "#43464e";
-            tagDisplay.style.border = "1px solid #34353b";
-        }else if(location.href.match("e-hentai")){
-            tagDisplay.style.background = "#F2EFDF";
-            tagDisplay.style.border = "1px solid #E3E0D1";
+    for (let i = 0; i < tags.length; i++) {
+        //調整checkbox
+        const checkbox = divs[i].querySelector('[name="modifygids[]"]');
+        if(checkbox){
+            checkbox.style.zIndex = 1;
         }
-        //新增按鈕
-        switchBtn = document.createElement("button");
-        switchBtn.classList.add("tagBtn");
-        switchBtn.textContent = "顯示tag"
-        switchBtn.classList.add("fade-out");
-        card.appendChild(switchBtn);
+        //小圖標
+        let flaged = false;
+        //新增card父元素
+        const card = addCard(divs[i]);
+        //新增背後tag顯示視窗
+        const tagDisplay = addTagDisplay(card);
+        //style
+        max_height = divs[i].style.height.match(/\d+/);
+        tagDisplay.style.maxHeight = Number(max_height) + 5 + "px";
 
-        switchBtn.addEventListener("click",function(e){
+        //新增按鈕
+        const switchBtn = addTagSwitch(card)
+
+        switchBtn.addEventListener("click", function (e) {
             e.preventDefault(); // 暫時避免頁面被莫名重整
             divs[i].classList.toggle("rotate-180");
             tagDisplay.classList.toggle("rotate180")
-            if(tagDisplay.classList.contains("rotate180")){
+            if (tagDisplay.classList.contains("rotate180")) {
                 this.textContent = "顯示tag"
-            }else{
+            } else {
                 this.textContent = "返回封面"
             }
         });
 
-        card.addEventListener("mouseenter",function(){
+        card.addEventListener("mouseenter", function () {
             this.querySelector('.tagBtn').style.display = "block";
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.querySelector('.tagBtn').classList.remove("fade-out");
                 this.querySelector('.tagBtn').classList.add("fade-in");
-            },.000001)
-            
+            }, .000001)
+
         });
-        card.addEventListener("mouseleave",function(){
+        card.addEventListener("mouseleave", function () {
             this.querySelector('.tagBtn').classList.add("fade-out");
             this.querySelector('.tagBtn').classList.remove("fade-in");
             this.querySelector('.tagBtn').style.display = "none";
@@ -143,6 +133,7 @@ function render() {
             divs[i].style.background = "#FFFFAA";
         }
         const tagsCount = tags[i].length;
+        const tag_fragment = document.createDocumentFragment();
         for (let j = 0; j < tagsCount; j++) {
             const tag = tags[i][j].split(":");
             const temp = tag[tag.length - 1];
@@ -155,12 +146,12 @@ function render() {
             const thisTagType = tag[tag.length - 2];
             if (thisTagType != tagType && j != 0) {
                 let nextLine = document.createElement("br");
-                tagDisplay.appendChild(nextLine);
+                tag_fragment.appendChild(nextLine);
             }
             tagType = thisTagType;
             //屏蔽
             chrome.storage.sync.get("Uploaders", (list) => {
-                if (divs[i].classList.contains("rotate-180")){
+                if (divs[i].classList.contains("rotate-180")) {
                     return
                 }
                 if (list.Uploaders[uploaders[i]]) {
@@ -171,14 +162,14 @@ function render() {
                     btn = document.createElement('div');
                     btn.innerHTML = `屏蔽警告<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
                     btn.classList.add("field-btn");
-                    btn.addEventListener('click',function(){
+                    btn.addEventListener('click', function () {
                         this.remove();
                     });
                     card.appendChild(btn);
                 }
             });
             chrome.storage.sync.get("tags", (list) => {
-                if (divs[i].classList.contains("rotate-180")){
+                if (divs[i].classList.contains("rotate-180")) {
                     return
                 }
                 if (list.tags[temp]) {
@@ -189,7 +180,7 @@ function render() {
                     btn = document.createElement('div');
                     btn.innerHTML = `屏蔽警告<p class="field-span">tag : ${temp}</p>點此確認`;
                     btn.classList.add("field-btn");
-                    btn.addEventListener('click',function(){
+                    btn.addEventListener('click', function () {
                         this.remove();
                     });
                     card.appendChild(btn);
@@ -212,8 +203,9 @@ function render() {
                 lastSpan.style.backgroundColor = "gray";
                 break;
             }
-            tagDisplay.appendChild(lastSpan);
+            tag_fragment.appendChild(lastSpan);
         }
+        tagDisplay.appendChild(tag_fragment);
         //預設日文圖標
         if (!flaged && !tags[i].includes("language:translated")) {
             galleryTitle[i].innerHTML = `<img src='${lanIcon.jp}'> ${galleryTitle[i].innerHTML}`;
@@ -260,15 +252,23 @@ function getGalleryData(data) {
                     "namespace": 1
                 })
             })
-            .then((res)=>{
+            .then((res) => {
                 return res.json()
             })
-            .then((data)=>{
+            .then((data) => {
+                const tags = [];
+                const uploaders = [];
+                const postedTime = [];
                 data.gmetadata.forEach(e => {
                     postedTime.push(e.posted);
                     tags.push(e.tags);
                     uploaders.push(e.uploader);
                 });
+                return {
+                    tags,
+                    uploaders,
+                    postedTime
+                }
             })
             .catch((err) => {
                 console.log(err)
