@@ -7,13 +7,18 @@
     -webkit-perspective: 1000;
 }
 
+.card:hover > .tagBtn{
+    transform: translate(-50%,0);
+    opacity: 1;
+}
+
 .tagBtn{
     cursor: pointer;
     position: absolute;
     bottom: 3px;
     left: 50%;
     text-align: center;
-    display: none;
+    display: block;
     width:100%;
     height: 20%;
     font-family: "Microsoft JhengHei";
@@ -27,14 +32,7 @@
     border:none;
     transition: all .5s;
     border-radius: 9px;
-}
 
-.fade-in{
-    transform: translate(-50%,0);
-    opacity: 1;
-}
-
-.fade-out{
     transform: translate(-50%,100%);
     opacity: 0;
 }

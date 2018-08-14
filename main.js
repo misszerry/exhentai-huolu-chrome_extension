@@ -84,36 +84,11 @@ function render(gdata) {
         //新增背後tag顯示視窗
         const tagDisplay = addTagDisplay(card);
         //style
-        max_height = divs[i].style.height.match(/\d+/);
-        tagDisplay.style.maxHeight = Number(max_height) + 5 + "px";
+        tagDisplay.style.maxHeight = parseInt(divs[i].style.height) + 5 + "px";
 
         //新增按鈕
-        const switchBtn = addTagSwitch(card)
+        addTagSwitch(card)
 
-        switchBtn.addEventListener("click", function (e) {
-            e.preventDefault(); // 暫時避免頁面被莫名重整
-            divs[i].classList.toggle("rotate-180");
-            tagDisplay.classList.toggle("rotate180")
-            if (tagDisplay.classList.contains("rotate180")) {
-                this.textContent = "顯示tag"
-            } else {
-                this.textContent = "返回封面"
-            }
-        });
-
-        card.addEventListener("mouseenter", function () {
-            this.querySelector('.tagBtn').style.display = "block";
-            setTimeout(() => {
-                this.querySelector('.tagBtn').classList.remove("fade-out");
-                this.querySelector('.tagBtn').classList.add("fade-in");
-            }, .000001)
-
-        });
-        card.addEventListener("mouseleave", function () {
-            this.querySelector('.tagBtn').classList.add("fade-out");
-            this.querySelector('.tagBtn').classList.remove("fade-in");
-            this.querySelector('.tagBtn').style.display = "none";
-        });
         //內容文字
         if (tags[i].length === 0) {
             tagDisplay.innerHTML += "<span class='tagspan'>無</span>";
