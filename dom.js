@@ -1,22 +1,25 @@
 const galleryList = document.querySelector(".itg");
 
 // 事件委託
-galleryList.addEventListener('click', (e) => {
-    if (e.target.classList.contains('tagBtn')) {
-        e.preventDefault(); //避免頁面莫名重整 (?)
-        parent = e.target.parentElement;
-        front = parent.querySelector('.id1');
-        back = parent.querySelector('.tag');
+function click_event_delegrat() {
+    galleryList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('tagBtn')) {
+            e.preventDefault(); //避免頁面莫名重整 (?)
+            parent = e.target.parentElement;
+            front = parent.querySelector('.id1');
+            back = parent.querySelector('.tag');
 
-        front.classList.toggle("rotate-180");
-        back.classList.toggle("rotate180")
-        if (back.classList.contains("rotate180")) {
-            e.target.textContent = "顯示tag"
-        } else {
-            e.target.textContent = "返回封面"
+            front.classList.toggle("rotate-180");
+            back.classList.toggle("rotate180")
+            if (back.classList.contains("rotate180")) {
+                e.target.textContent = "顯示tag"
+            } else {
+                e.target.textContent = "返回封面"
+            }
         }
-    }
-})
+    })
+}
+
 
 function addLoader() {
     const load = document.createElement("div");

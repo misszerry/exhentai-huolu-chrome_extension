@@ -5,6 +5,8 @@ let time; // 歷史讀到的最新時間
 let readTime; // 本頁最新時間
 let maxTime;
 let minTime;
+let exclude_tag_list;
+let exclude_uploader_list;
 const as = document.querySelectorAll("div.id3 a");
 /* main program */
 //全體開關
@@ -22,6 +24,8 @@ chrome.storage.sync.get(null,
         if (run) {
             transSwitch = list.trans;
             highLightSwitch = list.highLightSwitch;
+            exclude_tag_list = list.tags;
+            exclude_uploader_list = list.Uploaders;
             init()
         }
     });
@@ -31,7 +35,7 @@ async function init() {
     addLoader();
 
     //取得各gallery的gid與token
-    let all_request_data = []
+    let all_request_data = [];
     as.forEach(e => {
         const gid = e.href.split("/")[4];
         const token = e.href.split("/")[5];
@@ -70,6 +74,8 @@ function render(gdata) {
     const postedTime = gdata.postedTime;
     maxTime = postedTime[0];
     minTime = postedTime[0];
+
+    click_event_delegrat();
     //設定浮動視窗
     for (let i = 0; i < tags.length; i++) {
         //調整checkbox
@@ -87,7 +93,7 @@ function render(gdata) {
         tagDisplay.style.maxHeight = parseInt(divs[i].style.height) + 5 + "px";
 
         //新增按鈕
-        addTagSwitch(card)
+        const switchBtn = addTagSwitch(card)
 
         //內容文字
         if (tags[i].length === 0) {
@@ -125,14 +131,9 @@ function render(gdata) {
             }
             tagType = thisTagType;
             //屏蔽
-            chrome.storage.sync.get("Uploaders", (list) => {
-                if (divs[i].classList.contains("rotate-180")) {
-                    return
-                }
-                if (list.Uploaders[uploaders[i]]) {
-                    divs[i].classList.add("rotate-180");
-                    tagDisplay.classList.remove("rotate180")
-                    card.querySelector('.tagBtn').textContent = "返回封面";
+            if(!divs[i].classList.contains("rotate-180")){
+                if(exclude_uploader_list[uploaders[i]]){
+                    switchBtn.click();
 
                     btn = document.createElement('div');
                     btn.innerHTML = `屏蔽警告<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
@@ -141,16 +142,8 @@ function render(gdata) {
                         this.remove();
                     });
                     card.appendChild(btn);
-                }
-            });
-            chrome.storage.sync.get("tags", (list) => {
-                if (divs[i].classList.contains("rotate-180")) {
-                    return
-                }
-                if (list.tags[temp]) {
-                    divs[i].classList.add("rotate-180");
-                    tagDisplay.classList.remove("rotate180")
-                    card.querySelector('.tagBtn').textContent = "返回封面";
+                }else if(exclude_tag_list[temp]){
+                    switchBtn.click();
 
                     btn = document.createElement('div');
                     btn.innerHTML = `屏蔽警告<p class="field-span">tag : ${temp}</p>點此確認`;
@@ -160,7 +153,7 @@ function render(gdata) {
                     });
                     card.appendChild(btn);
                 }
-            });
+            }
             //翻譯
             let transed;
             if (transSwitch) {
