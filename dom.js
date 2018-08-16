@@ -22,15 +22,8 @@ function click_event_delegrat() {
 
 
 function addLoader() {
-    const load = document.createElement("div");
-    const loader = document.createElement("div");
-    const loadText = document.createElement("p");
-    loadText.textContent = "活路載入中";
-    load.classList.add("load");
-    loader.classList.add("loader");
-    load.appendChild(loadText);
-    load.appendChild(loader);
-    document.body.appendChild(load);
+    const template = document.createRange().createContextualFragment("<div class='load'><p>活路載入中</p><div class='loader'></div></div>");
+    document.body.appendChild(template);
 }
 
 function addCard(child_div) {
