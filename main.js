@@ -207,7 +207,7 @@ function render(gdata) {
         }
     }
     //移除load
-    document.querySelector(".load").remove();
+    document.getElementById('load').remove();
 }
 //fetch e-h api
 function getGalleryData(data) {

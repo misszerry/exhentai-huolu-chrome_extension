@@ -2,6 +2,9 @@ const galleryList = document.querySelector(".itg");
 
 // 事件委託
 function click_event_delegrat() {
+    if(!galleryList){
+        return;
+    }
     galleryList.addEventListener('click', (e) => {
         if (e.target.classList.contains('tagBtn')) {
             e.preventDefault(); //避免頁面莫名重整 (?)
@@ -22,7 +25,7 @@ function click_event_delegrat() {
 
 
 function addLoader() {
-    const template = document.createRange().createContextualFragment("<div class='load'><p>活路載入中</p><div class='loader'></div></div>");
+    const template = document.createRange().createContextualFragment("<div class='load' id='load'><p>活路載入中</p><div class='loader'></div></div>");
     document.body.appendChild(template);
 }
 
