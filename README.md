@@ -4,6 +4,10 @@ This is a chrome extension for e/ex-hentai user.
 **Please use Thumbnails mode on e/exhentai while running this extension**   
 **使用本程式請使用Thumbnails瀏覽模式**
 ![image](https://github.com/chuang861012/exhentai-huolu-chrome_extension/blob/master/README%20resource/demo.gif)
+# Language support | 支援語言
+- English (default)
+- 繁體中文
+- 简体中文 (未完成)
 # Features | 功能
 List of main features
 - language icon | 語言小圖標
@@ -34,6 +38,6 @@ Click the display button to display.
 # Install extension | 安裝擴充功能
 Free download:[Chrome Web Store - Extensions](https://chrome.google.com/webstore/detail/eexhentai%E6%B4%BB%E8%B7%AF%E5%A5%97%E4%BB%B6%E6%96%B0%E4%B8%8A%E5%82%B3%E6%A8%99%E4%BA%AE%E3%80%81tags%E9%A0%90%E8%A6%BD/kjciejplcemabaonmonjjjbloofpeena)
 # ToDo
-- English version (i18n)
+- i18n(Language support) : 简体中文(zh-CN))、日本語(ja)
 # License
 This extension is available under the MIT license.
