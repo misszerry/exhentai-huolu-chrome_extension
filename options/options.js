@@ -168,7 +168,7 @@ document.getElementById('del').onclick = () => {
             switch: false,
             url: ""
         },
-        "trans": true,
+        "trans": false,
         "exLastViewTime": 0,
         "eLastViewTime": 0,
         "exReadTime": 0,

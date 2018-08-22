@@ -62,3 +62,12 @@ ul{
     font-family: Microsoft JhengHei;
     font-weight: 700;
 }
+hr{
+    outline:none;
+    box-shadow: none;
+    border: none;
+    height: 1px;
+    width:100%;
+    color:#000;
+    background-color: #000;
+}

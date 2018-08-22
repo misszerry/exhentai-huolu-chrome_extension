@@ -15,9 +15,9 @@ function click_event_delegrat() {
             front.classList.toggle("rotate-180");
             back.classList.toggle("rotate180")
             if (back.classList.contains("rotate180")) {
-                e.target.textContent = "顯示tag"
+                e.target.textContent = i18n.show_tag;
             } else {
-                e.target.textContent = "返回封面"
+                e.target.textContent = i18n.close_tag;
             }
         }
     })
@@ -25,7 +25,7 @@ function click_event_delegrat() {
 
 
 function addLoader() {
-    const template = document.createRange().createContextualFragment("<div class='load' id='load'><p>活路載入中</p><div class='loader'></div></div>");
+    const template = document.createRange().createContextualFragment(`<div class='load' id='load'><p>${i18n.loading}</p><div class='loader'></div></div>`);
     document.body.appendChild(template);
 }
 
@@ -59,7 +59,7 @@ function addTagDisplay(card) {
 function addTagSwitch(card) {
     switchBtn = document.createElement("button");
     switchBtn.classList.add("tagBtn");
-    switchBtn.textContent = "顯示tag"
+    switchBtn.textContent = i18n.show_tag
     card.appendChild(switchBtn);
     return switchBtn;
 }

@@ -66,7 +66,7 @@ chrome.storage.sync.get(null,
             setLastTime.classList.remove("btn-success");
             setLastTime.classList.add("btn-info");
             setLastTime.disabled="true";
-            setLastTime.textContent = "已同步";
+            setLastTime.textContent = chrome.i18n.getMessage("popup_update");
         }
     });
 //強制更新時間
@@ -82,7 +82,7 @@ setLastTime.onclick = () => {
                 eLastViewTime: eReadTime
             });
             setLastTime.disabled="true";
-            setLastTime.textContent = "已同步";
+            setLastTime.textContent = chrome.i18n.getMessage("popup_update");
             setLastTime.classList.remove("btn-success");
             setLastTime.classList.add("btn-info");
         })

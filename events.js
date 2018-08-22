@@ -1,7 +1,7 @@
 //安裝與更新的初始化
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-        "title": "新增到屏蔽清單",
+        "title": chrome.i18n.getMessage("context_menu"),
         "id": "item1",
         "type": "normal",
         "contexts": ['link'],
@@ -42,7 +42,7 @@ chrome.runtime.onInstalled.addListener(() => {
             switch: false,
             url: ""
         };
-        const trans = list.trans || true;
+        const trans = list.trans || false;
         const exLastViewTime = list.exLastViewTime || 0;
         const eLastViewTime = list.eLastViewTime || 0;
         const exReadTime = list.exReadTime || 0;

@@ -1,0 +1,13 @@
+{
+    "popup_page":{"message":"popup_en.html"},
+    "popup_update":{"message":"up-to-date"},
+    "options_page":{"message":"options_en.html"},
+    "manuel_page":{"message":"manuel_en.html"},
+    "no_tag":{"message":"No tag"},
+    "show_tag":{"message":"show tag"},
+    "close_tag":{"message":"back"},
+    "loading":{"message":"Huolu loading..."},
+    "block_warning":{"message":"Blocked ! "},
+    "block_confirm":{"message":""},
+    "context_menu":{"message":"block this tag/uploader"}
+}

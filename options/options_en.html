@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Huolu Settings</title>
+    <link rel="stylesheet" href="../lib/bootstrap.css">
+    <link rel="stylesheet" href="option.css">
+</head>
+
+<body>
+   <h1 style="margin:0"><img src="../res/LOGO.png"></h1>
+    <h1>Settings</h1>
+    <hr>
+    <h2 class="title">Selections</h2>
+    <hr>
+    <div class="select">
+    <form style="width: 100%">
+        <input id="loca" type="checkbox" checked class="form-check-input">home-page redirect<br>
+        <input id="urlInput" type="text" class="form-control" style="width: 50%;margin: auto">
+        <button id="locaUrlButton" class="btn btn-success" style="cursor: pointer">confirm redirect url</button><br><br>
+        <input id="trans" type="checkbox" checked class="form-check-input">Tag chinese translate<br><br>
+        <input id="highLight" type="checkbox" checked class="form-check-input">HighLight new gallery<br><br>
+    </form>
+    </div>
+    <hr>
+    <h2 class="title">Block Settings</h2>
+    <button id="del" class="btn btn-info" style="cursor: pointer">Initialize</button>
+    <p>Double click to remove</p>
+    <hr>
+    <div class="container">
+        <div class="box">
+            <h2>Tags</h2>
+            <form action="">
+                <input id="taginput" type="text" placeholder="Tag" class="form-control"><br>
+                <input id="confirm-del-tag" type="submit" value="block" class="btn btn-primary" style="cursor: pointer">
+                <button id="removetag" class="btn btn-danger" style="cursor: pointer">remove</button>
+            </form>
+            <h4>blocked tags</h4>
+            <div id="stags"></div>
+        </div>
+        <div class="box">
+            <h2>Uploaders</h2>
+            <form>
+                <input id="UPinput" type="text" placeholder="Uploader" class="form-control"><br>
+                <input id="confirm-del-up" type="submit" value="block" class="btn btn-primary" style="cursor: pointer">
+                <button id="removeUP" class="btn btn-danger" style="cursor: pointer">remove</button>
+            </form>
+            <h4>blocked uploaders</h4>
+            <div id="sUPs"></div>
+        </div>
+    </div>
+
+
+</body>
+<script src="options.js"></script>
+</html>

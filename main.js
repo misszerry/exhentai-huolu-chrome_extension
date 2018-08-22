@@ -97,7 +97,7 @@ function render(gdata) {
 
         //內容文字
         if (tags[i].length === 0) {
-            tagDisplay.innerHTML += "<span class='tagspan'>無</span>";
+            tagDisplay.innerHTML += `<span class='tagspan'>${i18n.no_tag}</span>`;
         }
         var tagType = "";
         //未讀標亮
@@ -136,7 +136,7 @@ function render(gdata) {
                     switchBtn.click();
 
                     btn = document.createElement('div');
-                    btn.innerHTML = `屏蔽警告<p class="field-span">Uploader : ${uploaders[i]}</p>點此確認`;
+                    btn.innerHTML = `${i18n.block_warning}<p class="field-span">Uploader : ${uploaders[i]}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click', function () {
                         this.remove();
@@ -146,7 +146,7 @@ function render(gdata) {
                     switchBtn.click();
 
                     btn = document.createElement('div');
-                    btn.innerHTML = `屏蔽警告<p class="field-span">tag : ${temp}</p>點此確認`;
+                    btn.innerHTML = `${i18n.block_warning}<p class="field-span">tag : ${temp}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click', function () {
                         this.remove();

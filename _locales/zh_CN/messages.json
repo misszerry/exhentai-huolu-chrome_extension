@@ -1,0 +1,13 @@
+{
+    "popup_page":{"message":"popup_zh.html"},
+    "popup_update":{"message":"已同步"},
+    "options_page":{"message":"options_zh.html"},
+    "manuel_page":{"message":"manuel_zh.html"},
+    "no_tag":{"message":"无"},
+    "show_tag":{"message":"显示tag"},
+    "close_tag":{"message":"返回封面"},
+    "loading":{"message":"活路载入中"},
+    "block_warning":{"message":"屏蔽警告"},
+    "block_confirm":{"message":"点此确认"},
+    "context_menu":{"message":"新增到屏蔽清单"}
+}
