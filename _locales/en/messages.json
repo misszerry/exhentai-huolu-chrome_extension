@@ -1,4 +1,6 @@
 {
+    "title":{"message":"E/ExHentai Huolu tools"},
+    "description":{"message":"Tags display / language icon / Block tags/uploaders and more features"},
     "popup_page":{"message":"popup_en.html"},
     "popup_update":{"message":"up-to-date"},
     "options_page":{"message":"options_en.html"},
