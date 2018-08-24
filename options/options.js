@@ -46,10 +46,10 @@ function init() {
     chrome.storage.sync.get(null, function (list) {
         let tagdis = document.getElementById("stags");
         let Updis = document.getElementById("sUPs");
-        for (let i = 0; i < Object.keys(list.tags).length; i++) {
+        for (let i = 0; i < list.tags.length; i++) {
             let tagBox = document.createElement("div");
             let text = document.createElement("p");
-            let tag = Object.keys(list.tags)[i];
+            let tag = list.tags[i];
             tagBox.classList.add("imgBox");
             text.textContent = tag;
             text.className = "tag";
@@ -57,10 +57,10 @@ function init() {
             tagBox.appendChild(text);
             tagdis.appendChild(tagBox);
         }
-        for (let i = 0; i < Object.keys(list.Uploaders).length; i++) {
+        for (let i = 0; i < list.Uploaders.length; i++) {
             let upBox = document.createElement("div");
             let text = document.createElement("p");
-            let Uploader = Object.keys(list.Uploaders)[i];
+            let Uploader = list.Uploaders[i];
             upBox.classList.add("imgBox");
             text.textContent = Uploader;
             text.className = "Uploader";
@@ -77,7 +77,7 @@ function init() {
                 chrome.storage.sync.get("tags",
                     (list) => {
                         let temp = list.tags;
-                        delete temp[text];
+                        temp.splice(temp.indexOf(text),1);
                         chrome.storage.sync.set({
                             tags: temp
                         })
@@ -91,7 +91,7 @@ function init() {
                 chrome.storage.sync.get("Uploaders",
                     (list) => {
                         let temp = list.Uploaders;
-                        delete temp[text];
+                        temp.splice(temp.indexOf(text),1);
                         chrome.storage.sync.set({
                             Uploaders: temp
                         })
@@ -113,7 +113,7 @@ document.getElementById("confirm-del-tag").onclick = () => {
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
-            temp[text] = "clear";
+            temp.push(text);
             chrome.storage.sync.set({
                 tags: temp
             })
@@ -125,7 +125,7 @@ document.getElementById("confirm-del-up").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
-            temp[text] = "clear";
+            temp.push(text);
             chrome.storage.sync.set({
                 Uploaders: temp
             })
@@ -137,7 +137,7 @@ document.getElementById("removetag").onclick = () => {
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
-            delete temp[text];
+            temp.splice(temp.indexOf(text),1);
             chrome.storage.sync.set({
                 tags: temp
             })
@@ -150,7 +150,7 @@ document.getElementById("removeUP").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
-            delete temp[text];
+            temp.splice(temp.indexOf(text),1);
             chrome.storage.sync.set({
                 Uploaders: temp
             })
@@ -161,8 +161,8 @@ document.getElementById("removeUP").onclick = () => {
 document.getElementById('del').onclick = () => {
     chrome.storage.sync.clear();
     chrome.storage.sync.set({
-        "tags": {},
-        "Uploaders": {},
+        "tags": [],
+        "Uploaders": [],
         "run": true,
         "loca": {
             switch: false,

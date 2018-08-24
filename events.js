@@ -14,7 +14,7 @@ chrome.runtime.onInstalled.addListener(() => {
             chrome.storage.sync.get("Uploaders",
                 (list) => {
                     let temp = list.Uploaders;
-                    temp[uploader] = "clear";
+                    temp.push(uploader);
                     chrome.storage.sync.set({
                         Uploaders: temp
                     })
@@ -25,7 +25,7 @@ chrome.runtime.onInstalled.addListener(() => {
             chrome.storage.sync.get("tags",
                 (list) => {
                     let temp = list.tags;
-                    temp[tag] = "clear";
+                    temp.push(tag);
                     chrome.storage.sync.set({
                         tags: temp
                     })
@@ -35,8 +35,20 @@ chrome.runtime.onInstalled.addListener(() => {
         }
     });
     chrome.storage.sync.get(null, (list) => {
-        const tags = list.tags || {};
-        const Uploaders = list.Uploaders || {};
+        
+        let tags = list.tags || [];
+        let uploaders = list.Uploaders || [];
+
+        // uses obj in the past , change it for old users
+
+        if(!Array.isArray(tags)){
+            tags = Object.keys(tags);
+        }
+        if(!Array.isArray(uploaders)){
+            uploaders = Object.keys(uploaders);
+        }
+        
+        
         const run = list.run || true;
         const loca = list.loca || {
             switch: false,
@@ -50,7 +62,7 @@ chrome.runtime.onInstalled.addListener(() => {
         const highLightSwitch = list.highLightSwitch || true;
         chrome.storage.sync.set({
             "tags": tags,
-            "Uploaders": Uploaders,
+            "Uploaders": uploaders,
             "run": run,
             "loca": loca,
             "trans": trans,

@@ -1,3 +1,4 @@
+'use strict';
 /* data fields */
 let transSwitch; // 翻譯開關
 let highLightSwitch; // 標亮開關
@@ -132,7 +133,7 @@ function render(gdata) {
             tagType = thisTagType;
             //屏蔽
             if(!divs[i].classList.contains("rotate-180")){
-                if(exclude_uploader_list[uploaders[i]]){
+                if(exclude_uploader_list.includes(uploaders[i])){
                     switchBtn.click();
 
                     btn = document.createElement('div');
@@ -142,7 +143,7 @@ function render(gdata) {
                         this.remove();
                     });
                     card.appendChild(btn);
-                }else if(exclude_tag_list[temp]){
+                }else if(exclude_tag_list.includes(temp)){
                     switchBtn.click();
 
                     btn = document.createElement('div');
