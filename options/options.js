@@ -47,58 +47,47 @@ function init() {
         let tagdis = document.getElementById("stags");
         let Updis = document.getElementById("sUPs");
         for (let i = 0; i < list.tags.length; i++) {
-            let tagBox = document.createElement("div");
             let text = document.createElement("p");
             let tag = list.tags[i];
-            tagBox.classList.add("imgBox");
             text.textContent = tag;
             text.className = "tag";
             text.style.cursor = "pointer";
-            tagBox.appendChild(text);
-            tagdis.appendChild(tagBox);
+            tagdis.appendChild(text);
         }
         for (let i = 0; i < list.Uploaders.length; i++) {
-            let upBox = document.createElement("div");
             let text = document.createElement("p");
             let Uploader = list.Uploaders[i];
-            upBox.classList.add("imgBox");
             text.textContent = Uploader;
-            text.className = "Uploader";
+            text.className = "uploader";
             text.style.cursor = "pointer";
-            upBox.appendChild(text);
-            Updis.appendChild(upBox);
+            Updis.appendChild(text);
         }
         //設定雙擊刪除
-        const tagElements = document.querySelectorAll("div#stags p.tag");
-        const UpElements = document.querySelectorAll("div#sUPs p.Uploader");
-        for (let i = 0; i < Object.keys(list.tags).length; i++) {
-            tagElements[i].ondblclick = (e) => {
+        document.getElementById("block-container").addEventListener('dblclick', (e) => {
+            if (e.target.classList.contains('tag')) {
                 const text = e.target.textContent;
                 chrome.storage.sync.get("tags",
                     (list) => {
                         let temp = list.tags;
-                        temp.splice(temp.indexOf(text),1);
+                        temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             tags: temp
                         })
                     });
-                location.reload();
-            }
-        }
-        for (let i = 0; i < Object.keys(list.Uploaders).length; i++) {
-            UpElements[i].ondblclick = (e) => {
+                e.target.remove();
+            }else if(e.target.classList.contains('uploader')) {
                 const text = e.target.textContent;
                 chrome.storage.sync.get("Uploaders",
                     (list) => {
                         let temp = list.Uploaders;
-                        temp.splice(temp.indexOf(text),1);
+                        temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             Uploaders: temp
                         })
                     });
-                location.reload();
+                e.target.remove();
             }
-        }
+        });
         locacheck.checked = list.loca.switch;
         transcheck.checked = list.trans;
         highLight.checked = list.highLightSwitch;
@@ -108,12 +97,12 @@ function init() {
 //初始化
 init();
 //新增完全屏蔽tag
-document.getElementById("confirm-del-tag").onclick = () => {
+document.getElementById("confirm-del-tag").onclick = (e) => {
     let text = document.getElementById('taginput').value;
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
-            if(temp.includes(text)){
+            if (temp.includes(text)) {
                 return;
             }
             temp.push(text);
@@ -128,7 +117,7 @@ document.getElementById("confirm-del-up").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
-            if(temp.includes(text)){
+            if (temp.includes(text)) {
                 return;
             }
             temp.push(text);
@@ -143,10 +132,10 @@ document.getElementById("removetag").onclick = () => {
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
-            if(!temp.includes(text)){
+            if (!temp.includes(text)) {
                 return;
             }
-            temp.splice(temp.indexOf(text),1);
+            temp.splice(temp.indexOf(text), 1);
             chrome.storage.sync.set({
                 tags: temp
             })
@@ -159,10 +148,10 @@ document.getElementById("removeUP").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
-            if(!temp.includes(text)){
+            if (!temp.includes(text)) {
                 return;
             }
-            temp.splice(temp.indexOf(text),1);
+            temp.splice(temp.indexOf(text), 1);
             chrome.storage.sync.set({
                 Uploaders: temp
             })

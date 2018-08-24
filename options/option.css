@@ -56,20 +56,10 @@ p{
 .box{
     flex:1 1 200px;
     padding:20px;
-    text-align: center
+    text-align: center;
 }
 .select{
     text-align: center;
-}
-.imgBox:hover{
-    background-color: rgba(200,200,200,.2);
-}
-.imgBox{
-    max-width:20rem;
-    margin:1rem;
-    border:3px #ee5253 solid;
-    border-radius: 3px;
-    background-color: rgba(50,50,50,.2);
 }
 #stags,#sUPs{
     display: flex;
@@ -84,4 +74,20 @@ p{
     color:red;
     font-size: 16px;
     border:1px solid red;
+}
+.tag{
+    background-color: #60a3bc;
+    border: 1px solid #2d3436;
+    margin:.5rem;
+}
+.uploader{
+    background-color: #b2bec3;
+    border: 1px solid #2d3436;
+    margin:.5rem;
+}
+.tag:hover{
+    background-color: #82ccdd;
+}
+.uploader:hover{
+    background-color: #dfe6e9;
 }
