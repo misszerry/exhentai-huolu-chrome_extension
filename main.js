@@ -117,7 +117,11 @@ function render(gdata) {
         const tagsCount = tags[i].length;
         const tag_fragment = document.createDocumentFragment();
         for (let j = 0; j < tagsCount; j++) {
-            const tag = {"type":tags[i][j].split(":")[0],"name":tags[i][j].split(":")[1]};
+            const splited_tag_array = tags[i][j].split(":");
+            const tag = {
+                "type":splited_tag_array[splited_tag_array.length-2],
+                "name":splited_tag_array[splited_tag_array.length-1]
+            };
             //語言小圖標
             if (lanIcon[tags[i][j]]) {
                 flaged = true;
@@ -159,12 +163,7 @@ function render(gdata) {
             const lastSpan = document.createElement("span");
             lastSpan.textContent = tag.name;
             lastSpan.classList.add("tagspan");
-            if (tagcolors[tag.type]) {
-                lastSpan.style.backgroundColor = tagcolors[tag.type];
-            } else {
-                lastSpan.style.backgroundColor = "gray";
-                break;
-            }
+            lastSpan.style.backgroundColor = tagcolors[tag.type] || "gray";
             tag_fragment.appendChild(lastSpan);
         }
         tagDisplay.appendChild(tag_fragment);
