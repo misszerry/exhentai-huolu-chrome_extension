@@ -27,7 +27,7 @@ chrome.storage.sync.get(null,
             highLightSwitch = list.highLightSwitch;
             exclude_tag_list = list.tags;
             exclude_uploader_list = list.Uploaders;
-            init()
+            init();
         }
     });
 
@@ -100,7 +100,7 @@ function render(gdata) {
         if (tags[i].length === 0) {
             tagDisplay.innerHTML += `<span class='tagspan'>${i18n.no_tag}</span>`;
         }
-        var tagType = "";
+        let tagType = "";
         //未讀標亮
         if (postedTime[i] > maxTime) {
             maxTime = postedTime[i];
@@ -117,37 +117,35 @@ function render(gdata) {
         const tagsCount = tags[i].length;
         const tag_fragment = document.createDocumentFragment();
         for (let j = 0; j < tagsCount; j++) {
-            const tag = tags[i][j].split(":");
-            const temp = tag[tag.length - 1];
+            const tag = {"type":tags[i][j].split(":")[0],"name":tags[i][j].split(":")[1]};
             //語言小圖標
             if (lanIcon[tags[i][j]]) {
                 flaged = true;
                 galleryTitle[i].innerHTML = `<img src='${lanIcon[tags[i][j]]}'>${galleryTitle[i].innerHTML}`;
             }
             //控制tag種類換行
-            const thisTagType = tag[tag.length - 2];
-            if (thisTagType != tagType && j != 0) {
+            if (tag.type != tagType && j != 0) {
                 let nextLine = document.createElement("br");
                 tag_fragment.appendChild(nextLine);
             }
-            tagType = thisTagType;
+            tagType = tag.type;
             //屏蔽
             if(!divs[i].classList.contains("rotate-180")){
                 if(exclude_uploader_list.includes(uploaders[i])){
                     switchBtn.click();
 
-                    btn = document.createElement('div');
+                    const btn = document.createElement('div');
                     btn.innerHTML = `${i18n.block_warning}<p class="field-span">Uploader : ${uploaders[i]}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click', function () {
                         this.remove();
                     });
                     card.appendChild(btn);
-                }else if(exclude_tag_list.includes(temp)){
+                }else if(exclude_tag_list.includes(tag.name)){
                     switchBtn.click();
 
-                    btn = document.createElement('div');
-                    btn.innerHTML = `${i18n.block_warning}<p class="field-span">tag : ${temp}</p>${i18n.block_confirm}`;
+                    const btn = document.createElement('div');
+                    btn.innerHTML = `${i18n.block_warning}<p class="field-span">tag : ${tag.name}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
                     btn.addEventListener('click', function () {
                         this.remove();
@@ -156,18 +154,13 @@ function render(gdata) {
                 }
             }
             //翻譯
-            let transed;
-            if (transSwitch) {
-                transed = tData[temp] || tag[tag.length - 1];
-            } else {
-                transed = tag[tag.length - 1];
-            }
+            tag.name = transSwitch && tData[tag.name] ?  tData[tag.name] : tag.name;
             //創建tag span
             const lastSpan = document.createElement("span");
-            lastSpan.textContent = transed;
+            lastSpan.textContent = tag.name;
             lastSpan.classList.add("tagspan");
-            if (tagcolors[thisTagType]) {
-                lastSpan.style.backgroundColor = tagcolors[thisTagType];
+            if (tagcolors[tag.type]) {
+                lastSpan.style.backgroundColor = tagcolors[tag.type];
             } else {
                 lastSpan.style.backgroundColor = "gray";
                 break;

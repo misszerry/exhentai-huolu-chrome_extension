@@ -9,11 +9,14 @@ chrome.runtime.onInstalled.addListener(() => {
     });
     chrome.contextMenus.onClicked.addListener(function (info) {
         if (info.linkUrl.match("/uploader/")) {
-            const uploader = info.linkUrl.split("/").slice(-1)[0];
+            const uploader = info.linkUrl.split("/").slice(-1)[0].replace("%2B"," ");
             console.log(`Add ${uploader} to list.`);
             chrome.storage.sync.get("Uploaders",
                 (list) => {
                     let temp = list.Uploaders;
+                    if(temp.includes(uploader)){
+                        return;
+                    }
                     temp.push(uploader);
                     chrome.storage.sync.set({
                         Uploaders: temp
@@ -25,6 +28,9 @@ chrome.runtime.onInstalled.addListener(() => {
             chrome.storage.sync.get("tags",
                 (list) => {
                     let temp = list.tags;
+                    if(temp.includes(tag)){
+                        return;
+                    }
                     temp.push(tag);
                     chrome.storage.sync.set({
                         tags: temp

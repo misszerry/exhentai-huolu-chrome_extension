@@ -1,7 +1,6 @@
-const galleryList = document.querySelector(".itg");
-
 // 事件委託
 function click_event_delegrat() {
+    const galleryList = document.querySelector(".ido");
     if(!galleryList){
         return;
     }
@@ -30,9 +29,10 @@ function addLoader() {
 }
 
 function addCard(child_div) {
+    const parent_div = child_div.parentElement;
     const card = document.createElement("div");
     card.classList.add("card");
-    galleryList.appendChild(card);
+    parent_div.appendChild(card);
     card.appendChild(child_div);
     child_div.classList.add("card-front")
     return card;

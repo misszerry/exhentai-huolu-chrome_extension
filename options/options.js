@@ -113,6 +113,9 @@ document.getElementById("confirm-del-tag").onclick = () => {
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
+            if(temp.includes(text)){
+                return;
+            }
             temp.push(text);
             chrome.storage.sync.set({
                 tags: temp
@@ -125,6 +128,9 @@ document.getElementById("confirm-del-up").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
+            if(temp.includes(text)){
+                return;
+            }
             temp.push(text);
             chrome.storage.sync.set({
                 Uploaders: temp
@@ -137,6 +143,9 @@ document.getElementById("removetag").onclick = () => {
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
+            if(!temp.includes(text)){
+                return;
+            }
             temp.splice(temp.indexOf(text),1);
             chrome.storage.sync.set({
                 tags: temp
@@ -150,6 +159,9 @@ document.getElementById("removeUP").onclick = () => {
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
+            if(!temp.includes(text)){
+                return;
+            }
             temp.splice(temp.indexOf(text),1);
             chrome.storage.sync.set({
                 Uploaders: temp
