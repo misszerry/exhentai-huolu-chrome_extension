@@ -4,55 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <title>活路選項</title>
-    <link rel="stylesheet" href="../lib/bootstrap.css">
     <link rel="stylesheet" href="option.css">
 </head>
 
 <body>
-   <h1 style="margin:0"><img src="../res/LOGO.png"></h1>
-    <h1>全體設定</h1>
-    <hr>
-    <h2 class="title">選項</h2>
-    <hr>
-    <div class="select">
-    <h5>勾選開啟</h5>
-    <form style="width: 100%">
-        <input id="loca" type="checkbox" checked class="form-check-input">首頁重新導向<br>
-        <input id="urlInput" type="text" class="form-control" style="width: 50%;margin: auto">
-        <button id="locaUrlButton" class="btn btn-success" style="cursor: pointer">確認重新導向網址</button><br><br>
-        <input id="trans" type="checkbox" checked class="form-check-input">Tag中文翻譯(若有提供翻譯)<br><br>
-        <input id="highLight" type="checkbox" checked class="form-check-input">新上傳標亮(關閉仍會記錄最新瀏覽)<br><br>
-    </form>
+    <h1 style="margin:0">
+        <img src="../res/LOGO_NOB.png">
+    </h1>
+    <button id="del" style="cursor: pointer" class="btn">初始化</button>
+    <div class="setting_container">
+    <div class="setting_item">
+        <h2 class="title">選項</h2>
+        <ul class="selection">
+            <li>
+                <input id="trans" type="checkbox">Tag中文翻譯(若有提供翻譯)</li>
+            <li>
+                <input id="highLight" type="checkbox" checked>新上傳標亮(關閉仍會記錄最新瀏覽)</li>
+            <li><input id="low_size" type="checkbox" checked>低容量標籤 : 平均每張圖片低於 <input type="text" id="low_size_size" class="text_input" style="font-size:1.5rem;width:3rem;"> (mb)</li>
+        </ul>
     </div>
-    <hr>
-    <h2 class="title">屏蔽設定</h2>
-    <button id="del" class="btn btn-info" style="cursor: pointer">初始化</button>
-    <p>新增後，雙擊文字可直接移除</p>
-    <hr>
-    <div class="container" id="block-container">
-        <div class="box">
-            <h2>Tags</h2>
-            <form action="">
-                <input id="taginput" type="text" placeholder="輸入tag" class="form-control"><br>
-                <input id="confirm-del-tag" type="submit" value="屏蔽" class="btn btn-primary" style="cursor: pointer">
-                <button id="removetag" class="btn btn-danger" style="cursor: pointer">移除</button>
-            </form>
-            <h4>屏蔽中Tags</h4>
-            <div id="stags"></div>
-        </div>
-        <div class="box">
-            <h2>Uploaders</h2>
-            <form>
-                <input id="UPinput" type="text" placeholder="輸入uploader" class="form-control"><br>
-                <input id="confirm-del-up" type="submit" value="屏蔽" class="btn btn-primary" style="cursor: pointer">
-                <button id="removeUP" class="btn btn-danger" style="cursor: pointer">移除</button>
-            </form>
-            <h4>屏蔽中Uploaders</h4>
-            <div id="sUPs"></div>
+    <div class="setting_item">
+        <h2 class="title">屏蔽設定</h2>
+        <p style="font-size: 1.3rem">新增後，雙擊文字可直接移除</p>
+        <div class="container" id="block-container">
+            <div class="box">
+                <h2>Tags</h2>
+                <form>
+                    <input id="taginput" type="text" placeholder="輸入tag" class="text_input">
+                    <br>
+                    <input id="confirm-del-tag" type="submit" value="屏蔽" class="btn btn_blue" style="cursor: pointer">
+                    <button id="removetag" style="cursor: pointer" class="btn btn_red">移除</button>
+                </form>
+                <h4>屏蔽中Tags</h4>
+                <div id="stags"></div>
+            </div>
+            <div class="box">
+                <h2>Uploaders</h2>
+                <form>
+                    <input id="UPinput" type="text" placeholder="輸入uploader" class="text_input">
+                    <br>
+                    <input id="confirm-del-up" type="submit" value="屏蔽" class="btn btn_blue" style="cursor: pointer">
+                    <button id="removeUP" style="cursor: pointer" class="btn btn_red">移除</button>
+                </form>
+                <h4>屏蔽中Uploaders</h4>
+                <div id="sUPs"></div>
+            </div>
         </div>
     </div>
+</div>
 
 
 </body>
 <script src="options.js"></script>
+
 </html>

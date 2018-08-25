@@ -66,6 +66,7 @@ chrome.runtime.onInstalled.addListener(() => {
         const exReadTime = list.exReadTime || 0;
         const eReadTime = list.eReadTime || -1;
         const highLightSwitch = list.highLightSwitch || true;
+        const low_size = list.low_size || {"isOn":false,"size":0};
         chrome.storage.sync.set({
             "tags": tags,
             "Uploaders": uploaders,
@@ -76,7 +77,12 @@ chrome.runtime.onInstalled.addListener(() => {
             "eLastViewTime": eLastViewTime,
             "exReadTime": exReadTime,
             "eReadTime": eReadTime,
-            "highLightSwitch": highLightSwitch
+            "highLightSwitch": highLightSwitch,
+            "low_size":low_size
         })
     })
 });
+
+chrome.runtime.onUpdateAvailable.addListener(()=>{
+    chrome.runtime.reload();
+})

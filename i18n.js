@@ -4,5 +4,6 @@ const i18n = {
     "no_tag": chrome.i18n.getMessage('no_tag'),
     "loading": chrome.i18n.getMessage('loading'),
     "block_warning":chrome.i18n.getMessage('block_warning'),
-    "block_confirm":chrome.i18n.getMessage('block_confirm')
+    "block_confirm":chrome.i18n.getMessage('block_confirm'),
+    "low_size":chrome.i18n.getMessage('low_size')
 }

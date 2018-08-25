@@ -2,6 +2,7 @@
 /* data fields */
 let transSwitch; // 翻譯開關
 let highLightSwitch; // 標亮開關
+let low_size;//低容量警示標籤開關
 let time; // 歷史讀到的最新時間
 let readTime; // 本頁最新時間
 let maxTime;
@@ -27,6 +28,7 @@ chrome.storage.sync.get(null,
             highLightSwitch = list.highLightSwitch;
             exclude_tag_list = list.tags;
             exclude_uploader_list = list.Uploaders;
+            low_size = list.low_size;
             init();
         }
     });
@@ -45,7 +47,9 @@ async function init() {
     const gdata = {
         tags: [],
         uploaders: [],
-        postedTime: []
+        postedTime: [],
+        filecount:[],
+        filesize:[]
     };
     while (all_request_data.length > 0) {
         let req_data;
@@ -60,6 +64,8 @@ async function init() {
         gdata.tags = gdata.tags.concat(res.tags);
         gdata.uploaders = gdata.uploaders.concat(res.uploaders);
         gdata.postedTime = gdata.postedTime.concat(res.postedTime);
+        gdata.filesize = gdata.filesize.concat(res.filesize);
+        gdata.filecount = gdata.filecount.concat(res.filecount);
     }
     // render page
     render(gdata)
@@ -73,6 +79,8 @@ function render(gdata) {
     const tags = gdata.tags;
     const uploaders = gdata.uploaders;
     const postedTime = gdata.postedTime;
+    const filecount = gdata.filecount;
+    const filesize = gdata.filesize;
     maxTime = postedTime[0];
     minTime = postedTime[0];
 
@@ -113,6 +121,11 @@ function render(gdata) {
             divs[i].style.color = "#FF2D2D";
             galleryTitle[i].style.color = "#FF2D2D";
             divs[i].style.background = "#FFFFAA";
+        }
+        //低容量警示
+        if(low_size.isOn && filesize[i]/1048576/filecount[i] < low_size.size){
+            divs[i].setAttribute('data-uploader',`${i18n.low_size}\n${uploaders[i]}`);
+            divs[i].classList.add("low_size");
         }
         const tagsCount = tags[i].length;
         const tag_fragment = document.createDocumentFragment();
@@ -220,15 +233,21 @@ function getGalleryData(data) {
                 const tags = [];
                 const uploaders = [];
                 const postedTime = [];
+                const filecount = [];
+                const filesize = [];
                 data.gmetadata.forEach(e => {
                     postedTime.push(e.posted);
                     tags.push(e.tags);
                     uploaders.push(e.uploader);
+                    filecount.push(e.filecount);
+                    filesize.push(e.filesize);
                 });
                 return {
                     tags,
                     uploaders,
-                    postedTime
+                    postedTime,
+                    filecount,
+                    filesize
                 }
             })
             .catch((err) => {

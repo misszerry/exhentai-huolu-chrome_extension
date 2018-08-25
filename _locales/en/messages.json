@@ -11,5 +11,6 @@
     "loading":{"message":"Huolu loading..."},
     "block_warning":{"message":"Blocked ! "},
     "block_confirm":{"message":""},
-    "context_menu":{"message":"block this tag/uploader"}
+    "context_menu":{"message":"block this tag/uploader"},
+    "low_size":{"message":"Low file size"}
 }

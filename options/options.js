@@ -1,34 +1,9 @@
-const locacheck = document.getElementById("loca");
 const transcheck = document.getElementById("trans");
 const highLight = document.getElementById("highLight");
-const urlInput = document.getElementById("urlInput");
-const urlButton = document.getElementById("locaUrlButton");
+const low_size = document.getElementById("low_size");
+const low_size_size = document.getElementById("low_size_size");
 const defaulturl = `chrome-extension://${chrome.runtime.id}/res/default.jpg`;
 
-//重新導向開關
-locacheck.onchange = () => {
-    chrome.storage.sync.get("loca",
-        (list) => {
-            let temp = list.loca.url;
-            chrome.storage.sync.set({
-                loca: {
-                    switch: locacheck.checked,
-                    url: temp
-                }
-            })
-        });
-    location.reload();
-};
-//重新導向網址確認按鈕
-document.getElementById("locaUrlButton").onclick = () => {
-    chrome.storage.sync.set({
-        loca: {
-            switch: locacheck.checked,
-            url: urlInput.value
-        }
-    });
-    location.reload();
-};
 //翻譯開關
 transcheck.onchange = () => {
     chrome.storage.sync.set({
@@ -39,6 +14,17 @@ transcheck.onchange = () => {
 highLight.onchange = () => {
     chrome.storage.sync.set({
         highLightSwitch: highLight.checked
+    })
+}
+//低容量開關
+low_size.onchange = () => {
+    chrome.storage.sync.set({
+        low_size: {"isOn":low_size.checked,"size":low_size_size.value}
+    })
+}
+low_size_size.onchange = ()=>{
+    chrome.storage.sync.set({
+        low_size: {"isOn":low_size.checked,"size":low_size_size.value}
     })
 }
 //開啟頁面的初始化
@@ -88,10 +74,10 @@ function init() {
                 e.target.remove();
             }
         });
-        locacheck.checked = list.loca.switch;
         transcheck.checked = list.trans;
         highLight.checked = list.highLightSwitch;
-        urlInput.value = list.loca.url;
+        low_size.checked = list.low_size.isOn;
+        low_size_size.value = list.low_size.size;
     });
 }
 //初始化
@@ -165,17 +151,14 @@ document.getElementById('del').onclick = () => {
         "tags": [],
         "Uploaders": [],
         "run": true,
-        "loca": {
-            switch: false,
-            url: ""
-        },
         "trans": false,
         "exLastViewTime": 0,
         "eLastViewTime": 0,
         "exReadTime": 0,
         "eReadTime": -1,
-        "highLightSwitch": true
+        "highLightSwitch": true,
+        "low_size":{"isOn":false,"size":0}
     }, () => {
-        window.close();
+        location.reload();
     })
 };

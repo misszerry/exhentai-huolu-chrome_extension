@@ -11,5 +11,6 @@
     "loading":{"message":"活路载入中"},
     "block_warning":{"message":"屏蔽警告"},
     "block_confirm":{"message":"点此确认"},
-    "context_menu":{"message":"新增到屏蔽清单"}
+    "context_menu":{"message":"新增到屏蔽清单"},
+    "low_size":{"message":"低容量"}
 }

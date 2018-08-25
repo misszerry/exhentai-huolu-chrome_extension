@@ -69,6 +69,23 @@
     transition: all .5s;
     backface-visibility: hidden;
 }
+.low_size::after{
+    content: attr(data-uploader);
+    white-space: pre;
+    position: absolute;
+    background-color: red;
+    top: 10%;
+    left: 25%;
+    width: 100%;
+    transform: rotate(45deg);
+    text-align: center;
+    font-size: 1rem;
+    color:#FFF;
+    overflow: hidden;
+}
+.rotate-180.low_size::after{
+    opacity: 0;
+}
 .card-back {
     backface-visibility: hidden;
     transition: all .5s;
