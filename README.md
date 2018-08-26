@@ -37,7 +37,9 @@ Click the display button to display.
 在搜尋頁面顯示漫畫的所有標籤   
 點擊按鈕切換顯示tag
 ## low file size tag | 低容量標籤
-'File Size / Length'
+'''
+File Size / Length
+'''
 Set min size (mb) per page.  
 Show a tag on the gallery if file size lower than the set min size.  
 設定平均單張圖片最低容量，在搜尋頁面標示出容量過低的漫畫  
