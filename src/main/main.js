@@ -42,7 +42,7 @@ async function init() {
     as.forEach(e => {
         const gid = e.href.split("/")[4];
         const token = e.href.split("/")[5];
-        all_request_data.push([gid, token])
+        all_request_data.push([gid, token]);
     });
     const gdata = {
         tags: [],
@@ -54,11 +54,11 @@ async function init() {
     while (all_request_data.length > 0) {
         let req_data;
         if (all_request_data.length > 25) {
-            req_data = all_request_data.slice(0, 25)
+            req_data = all_request_data.slice(0, 25);
             all_request_data.splice(0, 25);
         } else {
             req_data = all_request_data;
-            all_request_data = []
+            all_request_data = [];
         }
         const res = await getGalleryData(req_data);
         gdata.tags = gdata.tags.concat(res.tags);
@@ -68,7 +68,7 @@ async function init() {
         gdata.filecount = gdata.filecount.concat(res.filecount);
     }
     // render page
-    render(gdata)
+    render(gdata);
 }
 
 //render主程式
@@ -102,7 +102,7 @@ function render(gdata) {
         tagDisplay.style.maxHeight = parseInt(divs[i].style.height) + 5 + "px";
 
         //新增按鈕
-        const switchBtn = addTagSwitch(card)
+        const switchBtn = addTagSwitch(card);
 
         //內容文字
         if (tags[i].length === 0) {
@@ -227,7 +227,7 @@ function getGalleryData(data) {
                 })
             })
             .then((res) => {
-                return res.json()
+                return res.json();
             })
             .then((data) => {
                 const tags = [];
@@ -248,10 +248,10 @@ function getGalleryData(data) {
                     postedTime,
                     filecount,
                     filesize
-                }
+                };
             })
             .catch((err) => {
-                console.log(err)
-            })
+                console.log(err);
+            });
     }
 }

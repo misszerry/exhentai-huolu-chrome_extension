@@ -8,25 +8,25 @@ const defaulturl = `chrome-extension://${chrome.runtime.id}/res/default.jpg`;
 transcheck.onchange = () => {
     chrome.storage.sync.set({
         trans: transcheck.checked
-    })
-}
+    });
+};
 //標亮開關
 highLight.onchange = () => {
     chrome.storage.sync.set({
         highLightSwitch: highLight.checked
-    })
-}
+    });
+};
 //低容量開關
 low_size.onchange = () => {
     chrome.storage.sync.set({
         low_size: {"isOn":low_size.checked,"size":low_size_size.value}
-    })
-}
+    });
+};
 low_size_size.onchange = ()=>{
     chrome.storage.sync.set({
         low_size: {"isOn":low_size.checked,"size":low_size_size.value}
-    })
-}
+    });
+};
 //開啟頁面的初始化
 function init() {
     chrome.storage.sync.get(null, function (list) {
@@ -58,7 +58,7 @@ function init() {
                         temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             tags: temp
-                        })
+                        });
                     });
                 e.target.remove();
             }else if(e.target.classList.contains('uploader')) {
@@ -69,7 +69,7 @@ function init() {
                         temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             Uploaders: temp
-                        })
+                        });
                     });
                 e.target.remove();
             }
@@ -94,7 +94,7 @@ document.getElementById("confirm-del-tag").onclick = (e) => {
             temp.push(text);
             chrome.storage.sync.set({
                 tags: temp
-            })
+            });
         });
 };
 //新增完全屏蔽uploader
@@ -109,7 +109,7 @@ document.getElementById("confirm-del-up").onclick = () => {
             temp.push(text);
             chrome.storage.sync.set({
                 Uploaders: temp
-            })
+            });
         });
 };
 //移除tag
@@ -124,7 +124,7 @@ document.getElementById("removetag").onclick = () => {
             temp.splice(temp.indexOf(text), 1);
             chrome.storage.sync.set({
                 tags: temp
-            })
+            });
         });
     location.reload();
 };
@@ -140,7 +140,7 @@ document.getElementById("removeUP").onclick = () => {
             temp.splice(temp.indexOf(text), 1);
             chrome.storage.sync.set({
                 Uploaders: temp
-            })
+            });
         });
     location.reload();
 };
@@ -160,5 +160,5 @@ document.getElementById('del').onclick = () => {
         "low_size":{"isOn":false,"size":0}
     }, () => {
         location.reload();
-    })
+    });
 };

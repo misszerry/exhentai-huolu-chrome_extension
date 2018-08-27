@@ -40,8 +40,8 @@
                 "https://e-hentai.org/tos*",
                 "https://e-hentai.org/stats*"
             ],
-            "css": ["style.css"],
-            "js": ["data.js","i18n.js","dom.js","main.js"]
+            "css": ["main/style.css"],
+            "js": ["main/data.js","main/i18n.js","main/dom.js","main/main.js"]
         }
     ],
     "icons": {

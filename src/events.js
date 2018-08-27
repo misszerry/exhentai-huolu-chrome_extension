@@ -20,7 +20,7 @@ chrome.runtime.onInstalled.addListener(() => {
                     temp.push(uploader);
                     chrome.storage.sync.set({
                         Uploaders: temp
-                    })
+                    });
                 });
         } else if (info.linkUrl.match("/tag/")) {
             const tag = info.linkUrl.split("/").slice(-1)[0].split("%3A").slice(-1)[0].replace("+", " ");
@@ -34,10 +34,10 @@ chrome.runtime.onInstalled.addListener(() => {
                     temp.push(tag);
                     chrome.storage.sync.set({
                         tags: temp
-                    })
+                    });
                 });
         } else {
-            console.log("not tag or uploader.")
+            console.log("not tag or uploader.");
         }
     });
     chrome.storage.sync.get(null, (list) => {
@@ -79,10 +79,10 @@ chrome.runtime.onInstalled.addListener(() => {
             "eReadTime": eReadTime,
             "highLightSwitch": highLightSwitch,
             "low_size":low_size
-        })
-    })
+        });
+    });
 });
 
 chrome.runtime.onUpdateAvailable.addListener(()=>{
     chrome.runtime.reload();
-})
+});

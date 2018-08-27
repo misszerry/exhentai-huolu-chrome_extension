@@ -6,4 +6,4 @@ const i18n = {
     "block_warning":chrome.i18n.getMessage('block_warning'),
     "block_confirm":chrome.i18n.getMessage('block_confirm'),
     "low_size":chrome.i18n.getMessage('low_size')
-}
+};

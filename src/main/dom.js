@@ -12,14 +12,14 @@ function click_event_delegrat() {
             back = parent.querySelector('.tag');
 
             front.classList.toggle("rotate-180");
-            back.classList.toggle("rotate180")
+            back.classList.toggle("rotate180");
             if (back.classList.contains("rotate180")) {
                 e.target.textContent = i18n.show_tag;
             } else {
                 e.target.textContent = i18n.close_tag;
             }
         }
-    })
+    });
 }
 
 
@@ -34,7 +34,7 @@ function addCard(child_div) {
     card.classList.add("card");
     parent_div.appendChild(card);
     card.appendChild(child_div);
-    child_div.classList.add("card-front")
+    child_div.classList.add("card-front");
     return card;
 }
 
@@ -59,7 +59,7 @@ function addTagDisplay(card) {
 function addTagSwitch(card) {
     switchBtn = document.createElement("button");
     switchBtn.classList.add("tagBtn");
-    switchBtn.textContent = i18n.show_tag
+    switchBtn.textContent = i18n.show_tag;
     card.appendChild(switchBtn);
     return switchBtn;
 }

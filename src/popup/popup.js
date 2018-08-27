@@ -43,7 +43,7 @@ open.onclick = () => {
         run: true
     });
     location.reload();
-}
+};
 close.onclick = () => {
     open.classList.add("active");
     close.classList.remove("active");
@@ -51,7 +51,7 @@ close.onclick = () => {
         run: false
     });
     location.reload();
-}
+};
 //進入設定頁面
 config.onclick = () => {
     if (chrome.runtime.openOptionsPage) { // New way to open options pages, if supported (Chrome 42+).
@@ -59,7 +59,7 @@ config.onclick = () => {
     } else { // Reasonable fallback.
         window.open(chrome.runtime.getURL('options.html'));
     }
-}
+};
 chrome.storage.sync.get(null,
     (list) => {
         if (list.exReadTime == list.exLastViewTime && list.eReadTime == list.eLastViewTime) {
@@ -85,5 +85,5 @@ setLastTime.onclick = () => {
             setLastTime.textContent = chrome.i18n.getMessage("popup_update");
             setLastTime.classList.remove("btn-success");
             setLastTime.classList.add("btn-info");
-        })
-}
+        });
+};

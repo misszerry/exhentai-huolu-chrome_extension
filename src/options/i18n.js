@@ -4,4 +4,4 @@ fetch(chrome.i18n.getMessage('options_page'))
     })
     .then((res) => {
         document.write(res);
-    })
+    });
