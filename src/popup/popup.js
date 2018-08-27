@@ -1,10 +1,15 @@
 const open = document.getElementById("open");
 const close = document.getElementById("close");
 const setLastTime = document.getElementById("setLastTime");
-const rankingYesterday = [];
-const gid = [];
-const token = [];
-const gdata = [];
+
+// i18n
+const elements = document.querySelectorAll('[data-i18n]');
+elements.forEach((e)=>{
+    const locale_str = chrome.i18n.getMessage(e.dataset.i18n);
+    if(locale_str !== e.innerHTML){
+        e.innerHTML = locale_str;
+    }
+});
 
 init();
 /* 初始化開關 */

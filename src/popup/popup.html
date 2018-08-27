@@ -1,1 +1,40 @@
+<html>
+
+<head>
+    <title>Popup</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../lib/bootstrap.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <h1 data-i18n="popup_title">Huolu</h1>
+    <div>
+        <button id="open" class="btn btn-outline-primary active" data-i18n="popup_on">ON</button>
+        <button id="close" class="btn btn-outline-danger" data-i18n="popup_off">OFF</button>
+    </div>
+    <h1 data-i18n="popup_update_title">browse
+        <br> time update</h1>
+    <div>
+        <button id="setLastTime" class="btn btn-lg btn-success" style="width:100%" data-i18n="popup_update_update">update</button>
+        <p style="font-size: 10px;text-align: center" data-i18n="popup_update_str">Please press update while you first installed this extension and browse exhentai.</p>
+    </div>
+    <h1 data-i18n="popup_settings_title">Settings</h1>
+    <div>
+        <a href="../manuel/manuel.html">
+            <button id="manuel" type="button" class="btn btn-secondary" data-i18n="popup_manuel">Manuel</button>
+        </a>
+        <button id="config" type="button" class="btn btn-secondary" data-i18n="popup_settings">Settings</button>
+    </div>
+    <p style="text-align:center;">
+        <span data-i18n="popup_version"></span>
+        <a href="updateLog.html" data-i18n="popup_log">update log</a>
+    </p>
+    <a href="https://github.com/chuang861012/exhentai-huolu-chrome_extension" target="_blank">
+        <img src="../res/GitHub-Mark-64px.png" style="display:block;margin:auto;margin-bottom:1rem">
+    </a>
+</body>
 <script src="i18n.js"></script>
+<script src="popup.js"></script>
+
+</html>
