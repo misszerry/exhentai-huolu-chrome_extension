@@ -1,4 +1,4 @@
-[![image](https://github.com/chuang861012/exhentai-huolu-chrome_extension/blob/master/res/LOGO.png)](https://chrome.google.com/webstore/detail/eexhentai-huolu-tools/kjciejplcemabaonmonjjjbloofpeena)
+[![image](https://github.com/chuang861012/exhentai-huolu-chrome_extension/blob/master/md_res/LOGO.png)](https://chrome.google.com/webstore/detail/eexhentai-huolu-tools/kjciejplcemabaonmonjjjbloofpeena)
 # E/Exhentai Huolu (chrome extension) | E/Exhentai 活路套件
 This is a chrome extension for e/ex-hentai user.   
 這是一個為e/exhentai用戶打造的chrome擴充功能   
