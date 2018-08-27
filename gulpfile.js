@@ -8,6 +8,7 @@ const replace = require('gulp-replace');
 const imagemin = require('gulp-imagemin');
 const clone = require('gulp-clone');
 const clean = require('gulp-clean');
+const zip = require('gulp-zip');
 
 //js檢測
 gulp.task('jslint', function () {
@@ -88,5 +89,12 @@ gulp.task('clone-rest', function () {
         .pipe(gulp.dest('dist'))
 });
 
+//壓縮發佈用zip檔
+gulp.task('zip', function () {
+    return gulp.src('dist/**')
+        .pipe(zip('ExHentaihuolu.zip'))
+        .pipe(gulp.dest('dist'))
+});
+
 //全部執行
-gulp.task('default', gulp.series("clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest"));
+gulp.task('default', gulp.series("clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest","zip"));
