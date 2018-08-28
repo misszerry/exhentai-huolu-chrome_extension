@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* data fields */
 let transSwitch; // 翻譯開關
 let highLightSwitch; // 標亮開關
-let low_size;//低容量警示標籤開關
+let low_size; //低容量警示標籤開關
 let time; // 歷史讀到的最新時間
 let readTime; // 本頁最新時間
 let maxTime;
@@ -39,7 +39,7 @@ async function init() {
 
     //取得各gallery的gid與token
     let all_request_data = [];
-    as.forEach(e => {
+    as.forEach((e) => {
         const gid = e.href.split("/")[4];
         const token = e.href.split("/")[5];
         all_request_data.push([gid, token]);
@@ -48,8 +48,8 @@ async function init() {
         tags: [],
         uploaders: [],
         postedTime: [],
-        filecount:[],
-        filesize:[]
+        filecount: [],
+        filesize: []
     };
     while (all_request_data.length > 0) {
         let req_data;
@@ -88,8 +88,8 @@ function render(gdata) {
     //設定浮動視窗
     for (let i = 0; i < tags.length; i++) {
         //調整checkbox
-        const checkbox = divs[i].querySelector('[name="modifygids[]"]');
-        if(checkbox){
+        const checkbox = divs[i].querySelector("[name='modifygids[]']");
+        if (checkbox) {
             checkbox.style.zIndex = 1;
         }
         //小圖標
@@ -123,8 +123,8 @@ function render(gdata) {
             divs[i].style.background = "#FFFFAA";
         }
         //低容量警示
-        if(low_size.isOn && filesize[i]/1048576/filecount[i] < low_size.size){
-            divs[i].setAttribute('data-uploader',`${i18n.low_size}\n${uploaders[i]}`);
+        if (low_size.isOn && filesize[i] / 1048576 / filecount[i] < low_size.size) {
+            divs[i].setAttribute("data-uploader", `${i18n.low_size}\n${uploaders[i]}`);
             divs[i].classList.add("low_size");
         }
         const tagsCount = tags[i].length;
@@ -132,8 +132,8 @@ function render(gdata) {
         for (let j = 0; j < tagsCount; j++) {
             const splited_tag_array = tags[i][j].split(":");
             const tag = {
-                "type":splited_tag_array[splited_tag_array.length-2],
-                "name":splited_tag_array[splited_tag_array.length-1]
+                "type": splited_tag_array[splited_tag_array.length - 2],
+                "name": splited_tag_array[splited_tag_array.length - 1]
             };
             //語言小圖標
             if (lanIcon[tags[i][j]]) {
@@ -147,31 +147,31 @@ function render(gdata) {
             }
             tagType = tag.type;
             //屏蔽
-            if(!divs[i].classList.contains("rotate-180")){
-                if(exclude_uploader_list.includes(uploaders[i])){
+            if (!divs[i].classList.contains("rotate-180")) {
+                if (exclude_uploader_list.includes(uploaders[i])) {
                     switchBtn.click();
 
-                    const btn = document.createElement('div');
+                    const btn = document.createElement("div");
                     btn.innerHTML = `${i18n.block_warning}<p class="field-span">Uploader : ${uploaders[i]}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
-                    btn.addEventListener('click', function () {
+                    btn.addEventListener("click", function () {
                         this.remove();
                     });
                     card.appendChild(btn);
-                }else if(exclude_tag_list.includes(tag.name)){
+                } else if (exclude_tag_list.includes(tag.name)) {
                     switchBtn.click();
 
-                    const btn = document.createElement('div');
+                    const btn = document.createElement("div");
                     btn.innerHTML = `${i18n.block_warning}<p class="field-span">tag : ${tag.name}</p>${i18n.block_confirm}`;
                     btn.classList.add("field-btn");
-                    btn.addEventListener('click', function () {
+                    btn.addEventListener("click", function () {
                         this.remove();
                     });
                     card.appendChild(btn);
                 }
             }
             //翻譯
-            tag.name = transSwitch && tData[tag.name] ?  tData[tag.name] : tag.name;
+            tag.name = transSwitch && tData[tag.name] ? tData[tag.name] : tag.name;
             //創建tag span
             const lastSpan = document.createElement("span");
             lastSpan.textContent = tag.name;
@@ -213,45 +213,40 @@ function render(gdata) {
         }
     }
     //移除load
-    document.getElementById('load').remove();
+    document.getElementById("load").remove();
 }
 //fetch e-h api
 function getGalleryData(data) {
     if (data.length > 0) {
         return fetch("https://api.e-hentai.org/api.php", {
-                method: 'POST',
-                body: JSON.stringify({
-                    "method": "gdata",
-                    "gidlist": data,
-                    "namespace": 1
-                })
+            method: "POST",
+            body: JSON.stringify({
+                "method": "gdata",
+                "gidlist": data,
+                "namespace": 1
             })
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                const tags = [];
-                const uploaders = [];
-                const postedTime = [];
-                const filecount = [];
-                const filesize = [];
-                data.gmetadata.forEach(e => {
-                    postedTime.push(e.posted);
-                    tags.push(e.tags);
-                    uploaders.push(e.uploader);
-                    filecount.push(e.filecount);
-                    filesize.push(e.filesize);
-                });
-                return {
-                    tags,
-                    uploaders,
-                    postedTime,
-                    filecount,
-                    filesize
-                };
-            })
-            .catch((err) => {
-                console.log(err);
+        }).then((res) => res.json()).then((gdata) => {
+            const tags = [];
+            const uploaders = [];
+            const postedTime = [];
+            const filecount = [];
+            const filesize = [];
+            gdata.gmetadata.forEach((e) => {
+                postedTime.push(e.posted);
+                tags.push(e.tags);
+                uploaders.push(e.uploader);
+                filecount.push(e.filecount);
+                filesize.push(e.filesize);
             });
+            return {
+                tags,
+                uploaders,
+                postedTime,
+                filecount,
+                filesize
+            };
+        }).catch((err) => {
+            console.log(err); // eslint-disable-line no-console
+        });
     }
 }

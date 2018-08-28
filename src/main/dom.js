@@ -1,15 +1,15 @@
 // 事件委託
-function click_event_delegrat() {
+function click_event_delegrat() { // eslint-disable-line no-unused-vars 
     const galleryList = document.querySelector(".ido");
-    if(!galleryList){
+    if (!galleryList) {
         return;
     }
-    galleryList.addEventListener('click', (e) => {
-        if (e.target.classList.contains('tagBtn')) {
+    galleryList.addEventListener("click", (e) => {
+        if (e.target.classList.contains("tagBtn")) {
             e.preventDefault(); //避免頁面莫名重整 (?)
-            parent = e.target.parentElement;
-            front = parent.querySelector('.id1');
-            back = parent.querySelector('.tag');
+            const parent = e.target.parentElement;
+            const front = parent.querySelector(".id1");
+            const back = parent.querySelector(".tag");
 
             front.classList.toggle("rotate-180");
             back.classList.toggle("rotate180");
@@ -23,12 +23,12 @@ function click_event_delegrat() {
 }
 
 
-function addLoader() {
+function addLoader() { // eslint-disable-line no-unused-vars 
     const template = document.createRange().createContextualFragment(`<div class='load' id='load'><p>${i18n.loading}</p><div class='loader'></div></div>`);
     document.body.appendChild(template);
 }
 
-function addCard(child_div) {
+function addCard(child_div) { // eslint-disable-line no-unused-vars 
     const parent_div = child_div.parentElement;
     const card = document.createElement("div");
     card.classList.add("card");
@@ -38,7 +38,7 @@ function addCard(child_div) {
     return card;
 }
 
-function addTagDisplay(card) {
+function addTagDisplay(card) { // eslint-disable-line no-unused-vars 
     const tagDisplay = document.createElement("div");
     tagDisplay.classList.add("tag");
     tagDisplay.classList.add("card-back");
@@ -56,8 +56,8 @@ function addTagDisplay(card) {
     return tagDisplay;
 }
 
-function addTagSwitch(card) {
-    switchBtn = document.createElement("button");
+function addTagSwitch(card) { // eslint-disable-line no-unused-vars 
+    const switchBtn = document.createElement("button");
     switchBtn.classList.add("tagBtn");
     switchBtn.textContent = i18n.show_tag;
     card.appendChild(switchBtn);

@@ -1,3 +1,4 @@
+/* eslint-disable */
 //tag標籤顏色
 const tagcolors = {
     "language": "red",

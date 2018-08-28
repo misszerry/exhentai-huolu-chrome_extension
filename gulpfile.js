@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify-es').default;
-const jshint = require('gulp-jshint');
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const minifyHTML = require('gulp-minify-html');
@@ -9,12 +8,14 @@ const imagemin = require('gulp-imagemin');
 const clone = require('gulp-clone');
 const clean = require('gulp-clean');
 const zip = require('gulp-zip');
+const eslint = require('gulp-eslint');
 
-//js檢測
-gulp.task('jslint', function () {
-    return gulp.src('src/**/**.js')
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
+//eslint
+gulp.task('eslint', function () {
+    return gulp.src("src/**/**.js")
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
 //清空dist
@@ -97,4 +98,4 @@ gulp.task('zip', function () {
 });
 
 //全部執行
-gulp.task('default', gulp.series("clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest","zip"));
+gulp.task('default', gulp.series("eslint","clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest", "zip"));

@@ -1,5 +1,5 @@
 //i18n
-const elements = document.querySelectorAll('[data-i18n]');
+const elements = document.querySelectorAll("[data-i18n]");
 elements.forEach((e)=>{
     const locale_str = chrome.i18n.getMessage(e.dataset.i18n);
     if(locale_str !== e.innerHTML){
@@ -11,7 +11,6 @@ const transcheck = document.getElementById("trans");
 const highLight = document.getElementById("highLight");
 const low_size = document.getElementById("low_size");
 const low_size_size = document.getElementById("low_size_size");
-const defaulturl = `chrome-extension://${chrome.runtime.id}/res/default.jpg`;
 
 //翻譯開關
 transcheck.onchange = () => {
@@ -58,23 +57,23 @@ function init() {
             Updis.appendChild(text);
         }
         //設定雙擊刪除
-        document.getElementById("block-container").addEventListener('dblclick', (e) => {
-            if (e.target.classList.contains('tag')) {
+        document.getElementById("block-container").addEventListener("dblclick", (e) => {
+            if (e.target.classList.contains("tag")) {
                 const text = e.target.textContent;
                 chrome.storage.sync.get("tags",
-                    (list) => {
-                        let temp = list.tags;
+                    (tag_list) => {
+                        let temp = tag_list.tags;
                         temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             tags: temp
                         });
                     });
                 e.target.remove();
-            }else if(e.target.classList.contains('uploader')) {
+            }else if(e.target.classList.contains("uploader")) {
                 const text = e.target.textContent;
                 chrome.storage.sync.get("Uploaders",
-                    (list) => {
-                        let temp = list.Uploaders;
+                    (uploader_list) => {
+                        let temp = uploader_list.Uploaders;
                         temp.splice(temp.indexOf(text), 1);
                         chrome.storage.sync.set({
                             Uploaders: temp
@@ -92,8 +91,8 @@ function init() {
 //初始化
 init();
 //新增完全屏蔽tag
-document.getElementById("confirm-del-tag").onclick = (e) => {
-    let text = document.getElementById('taginput').value;
+document.getElementById("confirm-del-tag").onclick = () => {
+    let text = document.getElementById("taginput").value;
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
@@ -108,7 +107,7 @@ document.getElementById("confirm-del-tag").onclick = (e) => {
 };
 //新增完全屏蔽uploader
 document.getElementById("confirm-del-up").onclick = () => {
-    let text = document.getElementById('UPinput').value;
+    let text = document.getElementById("UPinput").value;
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
@@ -123,7 +122,7 @@ document.getElementById("confirm-del-up").onclick = () => {
 };
 //移除tag
 document.getElementById("removetag").onclick = () => {
-    let text = document.getElementById('taginput').value;
+    let text = document.getElementById("taginput").value;
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
@@ -139,7 +138,7 @@ document.getElementById("removetag").onclick = () => {
 };
 //移除uploader
 document.getElementById("removeUP").onclick = () => {
-    let text = document.getElementById('UPinput').value;
+    let text = document.getElementById("UPinput").value;
     chrome.storage.sync.get("Uploaders",
         (list) => {
             let temp = list.Uploaders;
@@ -154,7 +153,7 @@ document.getElementById("removeUP").onclick = () => {
     location.reload();
 };
 //初始化按鈕
-document.getElementById('del').onclick = () => {
+document.getElementById("del").onclick = () => {
     chrome.storage.sync.clear();
     chrome.storage.sync.set({
         "tags": [],

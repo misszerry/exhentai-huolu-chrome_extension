@@ -1,9 +1,10 @@
 const open = document.getElementById("open");
 const close = document.getElementById("close");
 const setLastTime = document.getElementById("setLastTime");
+const config = document.getElementById("config");
 
 // i18n
-const elements = document.querySelectorAll('[data-i18n]');
+const elements = document.querySelectorAll("[data-i18n]");
 elements.forEach((e)=>{
     const locale_str = chrome.i18n.getMessage(e.dataset.i18n);
     if(locale_str !== e.innerHTML){
@@ -62,7 +63,7 @@ config.onclick = () => {
     if (chrome.runtime.openOptionsPage) { // New way to open options pages, if supported (Chrome 42+).
         chrome.runtime.openOptionsPage();
     } else { // Reasonable fallback.
-        window.open(chrome.runtime.getURL('options.html'));
+        window.open(chrome.runtime.getURL("options.html"));
     }
 };
 chrome.storage.sync.get(null,
