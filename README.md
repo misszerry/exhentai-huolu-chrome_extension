@@ -8,7 +8,7 @@ This is a chrome extension for e/ex-hentai user.
 # Language support | 支援語言
 - English (default)
 - 繁體中文
-- 简体中文 (未完成)
+- 简体中文
 # Features | 功能
 List of main features
 - language icon | 語言小圖標
@@ -46,6 +46,6 @@ Show a tag on the gallery if file size lower than the set min size.
 # Install extension | 安裝擴充功能
 Free download:[Chrome Web Store - Extensions](https://chrome.google.com/webstore/detail/eexhentai%E6%B4%BB%E8%B7%AF%E5%A5%97%E4%BB%B6%E6%96%B0%E4%B8%8A%E5%82%B3%E6%A8%99%E4%BA%AE%E3%80%81tags%E9%A0%90%E8%A6%BD/kjciejplcemabaonmonjjjbloofpeena)
 # ToDo
-- i18n(Language support) : 简体中文(zh-CN))、日本語(ja)
+- i18n(Language support) : 日本語(ja)
 # License
 This extension is available under the MIT license.
