@@ -29,7 +29,7 @@ gulp.task('clean', function () {
 //修改manifest.json
 gulp.task('replace-json', function () {
     return gulp.src("src/manifest.json")
-        .pipe(replace('["main/data.js","main/i18n.js","main/dom.js","main/main.js"]', '["main/main.js"]'))
+        .pipe(replace('["main/data.js","main/i18n.js","main/dom.js","main/utils.js","main/main.js"]', '["main/main.js"]'))
         .pipe(gulp.dest("dist"));
 });
 

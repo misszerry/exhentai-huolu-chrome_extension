@@ -10,15 +10,17 @@
         "sourceType": "module"
     },
     "globals": {
-        "tagcolors": true,
-        "tData": true,
-        "lanIcon": true,
-        "i18n": true,
-        "addLoader": true,
-        "click_event_delegrat": true,
-        "addCard": true,
-        "addTagDisplay": true,
-        "addTagSwitch": true
+        "tagcolors": false,
+        "tData": false,
+        "lanIcon": false,
+        "i18n": false,
+        "addLoader": false,
+        "click_event_delegrat": false,
+        "addCard": false,
+        "addTagDisplay": false,
+        "addTagSwitch": false,
+        "getGalleryData":false,
+        "getRequestDataFromPage":false
     },
     "rules": {
         "indent": ["error", 4],
