@@ -56,27 +56,22 @@ async function init() {
             req_data = all_request_data;
             all_request_data = [];
         }
-        const res = await getGalleryData(req_data);
-        gdata.tags = gdata.tags.concat(res.tags);
-        gdata.uploaders = gdata.uploaders.concat(res.uploaders);
-        gdata.postedTime = gdata.postedTime.concat(res.postedTime);
-        gdata.filesize = gdata.filesize.concat(res.filesize);
-        gdata.filecount = gdata.filecount.concat(res.filecount);
+        const {tags,uploaders,postedTime,filecount,filesize} = await getGalleryData(req_data);
+        gdata.tags = [...gdata.tags,...tags];
+        gdata.uploaders = [...gdata.uploaders,...uploaders];
+        gdata.postedTime = [...gdata.postedTime,...postedTime];
+        gdata.filesize = [...gdata.filesize,...filesize];
+        gdata.filecount = [...gdata.filecount,...filecount];
     }
     // render page
     render(gdata);
 }
 
 //render主程式
-function render(gdata) {
+function render({tags,uploaders,postedTime,filecount,filesize}) {
     const divs = document.querySelectorAll("div.id1");
     const galleryTitle = document.querySelectorAll("div.id2 a");
 
-    const tags = gdata.tags;
-    const uploaders = gdata.uploaders;
-    const postedTime = gdata.postedTime;
-    const filecount = gdata.filecount;
-    const filesize = gdata.filesize;
     maxTime = postedTime[0];
     minTime = postedTime[0];
 
