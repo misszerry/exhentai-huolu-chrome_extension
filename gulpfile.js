@@ -35,7 +35,7 @@ gulp.task('replace-json', function () {
 
 //壓縮HTML
 gulp.task('compress-html', function () {
-    return gulp.src(['src/*.html', 'src/options/*.html', 'src/popup/*.html', 'src/manuel/*.html'], {
+    return gulp.src(['src/*.html', 'src/options/*.html', 'src/popup/*.html', 'src/manual/*.html'], {
             base: "src"
         })
         .pipe(minifyHTML({
@@ -48,7 +48,7 @@ gulp.task('compress-html', function () {
 
 //壓縮css
 gulp.task('compress-css', () => {
-    return gulp.src(['src/*.css', 'src/main/*.css', 'src/options/*.css', 'src/popup/*.css', 'src/manuel/*.css'], {
+    return gulp.src(['src/*.css', 'src/main/*.css', 'src/options/*.css', 'src/popup/*.css', 'src/manual/*.css'], {
             base: "src"
         })
         .pipe(cleanCSS())
@@ -65,7 +65,7 @@ gulp.task('main-js', function () {
 
 //壓縮其他js
 gulp.task("compress-js", function () {
-    return gulp.src(['src/*.js', 'src/options/*.js', 'src/popup/*.js', 'src/manuel/*.js'], {
+    return gulp.src(['src/*.js', 'src/options/*.js', 'src/popup/*.js', 'src/manual/*.js'], {
             base: "src"
         })
         .pipe(uglify())
