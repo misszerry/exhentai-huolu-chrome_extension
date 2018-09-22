@@ -2,10 +2,10 @@
     "manifest_version": 2,
     "name": "__MSG_title__",
     "description": "__MSG_description__",
-    "version": "1.73",
+    "version": "1.74",
     "default_locale":"en",
     "browser_action": {
-        "default_icon": "res/icon48.png",
+        "default_icon": "res/icon16_disable.png",
         "default_popup": "popup/popup.html"
     },
     "permissions": ["contextMenus","storage","https://exhentai.org/*"],

@@ -12,6 +12,7 @@ let exclude_tag_list;
 let exclude_uploader_list;
 const as = document.querySelectorAll("div.id3 a");
 /* main program */
+chrome.runtime.sendMessage({"message": "active"});
 //全體開關
 chrome.storage.sync.get(null,
     (list) => {

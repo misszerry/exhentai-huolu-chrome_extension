@@ -53,12 +53,14 @@ chrome.runtime.onUpdateAvailable.addListener(() => {
 });
 
 // create context menu
-chrome.contextMenus.create({
-    title: chrome.i18n.getMessage("context_menu"),
-    id: "item1",
-    type: "normal",
-    contexts: ["link"],
-    documentUrlPatterns: ["https://exhentai.org/g/*", "https://e-hentai.org/g/*"]
+chrome.contextMenus.removeAll(()=>{
+    chrome.contextMenus.create({
+        title: chrome.i18n.getMessage("context_menu"),
+        id: "item1",
+        type: "normal",
+        contexts: ["link"],
+        documentUrlPatterns: ["https://exhentai.org/g/*", "https://e-hentai.org/g/*"]
+    });
 });
 
 // handle context menu
@@ -89,5 +91,35 @@ chrome.contextMenus.onClicked.addListener(function (info) {
                     tags: temp
                 });
             });
+    }
+});
+
+// change icon
+chrome.runtime.onMessage.addListener((request, sender) => {
+    if (request.message === "active") {
+        chrome.browserAction.setIcon({
+            path: "res/icon16.png",
+            tabId: sender.tab.id
+        });
+    }
+});
+
+// set badge color
+chrome.browserAction.setBadgeBackgroundColor({
+    color: "#ee5253"
+});
+
+// set text on / off
+chrome.storage.onChanged.addListener((change) => {
+    if (change.run) {
+        if (!change.run.newValue) {
+            chrome.browserAction.setBadgeText({
+                text: "OFF"
+            });
+        } else {
+            chrome.browserAction.setBadgeText({
+                text: ""
+            });
+        }
     }
 });

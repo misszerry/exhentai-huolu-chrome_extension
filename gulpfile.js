@@ -98,4 +98,4 @@ gulp.task('zip', function () {
 });
 
 //全部執行
-gulp.task('default', gulp.series("eslint","clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest", "zip"));
+gulp.task('default', gulp.series("eslint", "clean", "compress-html", "compress-css", "main-js", "compress-js", "compress-image", "replace-json", "clone-rest", "zip"));
