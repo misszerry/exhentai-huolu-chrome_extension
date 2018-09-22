@@ -1,10 +1,11 @@
 "use strict";
-/* data fields */
+/* switch */
 let transSwitch; // 翻譯開關
 let highLightSwitch; // 標亮開關
-let low_size; //低容量警示標籤開關
-let time; // 歷史讀到的最新時間
-let readTime; // 本頁最新時間
+let low_size; //低容量警示標籤開關 
+/* data fields */
+let time; // 歷史讀到的最新時間 time saved in storage
+let readTime; // 本頁最新時間 time of this page
 let maxTime;
 let minTime;
 let exclude_tag_list;
@@ -15,7 +16,7 @@ const as = document.querySelectorAll("div.id3 a");
 chrome.storage.sync.get(null,
     (list) => {
         const run = list.run;
-        //選擇使用的時間
+        // get thie correct time to use
         if (location.href.match("exhentai")) {
             time = list.exLastViewTime;
             readTime = list.exReadTime;
@@ -34,10 +35,10 @@ chrome.storage.sync.get(null,
     });
 
 async function init() {
-    //Loading視覺化
+    //Loader
     addLoader();
 
-    //取得各gallery的gid與token
+    //get gid & token
     let all_request_data = getRequestDataFromPage(as);
 
     const gdata = {
@@ -67,7 +68,7 @@ async function init() {
     render(gdata);
 }
 
-//render主程式
+//render
 function render({tags,uploaders,postedTime,filecount,filesize}) {
     const divs = document.querySelectorAll("div.id1");
     const galleryTitle = document.querySelectorAll("div.id2 a");
@@ -76,31 +77,31 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
     minTime = postedTime[0];
 
     click_event_delegrat();
-    //設定浮動視窗
+    // set up display
     for (let i = 0; i < tags.length; i++) {
-        //調整checkbox
+        // fix checkbox
         const checkbox = divs[i].querySelector("[name='modifygids[]']");
         if (checkbox) {
             checkbox.style.zIndex = 1;
         }
-        //小圖標
+        // language flag icon
         let flaged = false;
-        //新增card父元素
+        // add card as parent div
         const card = addCard(divs[i]);
-        //新增背後tag顯示視窗
+        // add display to the card back side
         const tagDisplay = addTagDisplay(card);
         //style
         tagDisplay.style.maxHeight = parseInt(divs[i].style.height) + 5 + "px";
 
-        //新增按鈕
+        // add a switch button
         const switchBtn = addTagSwitch(card);
 
-        //內容文字
+        // if no tag , add a no_tag tag into display
         if (tags[i].length === 0) {
             tagDisplay.innerHTML += `<span class='tagspan'>${i18n.no_tag}</span>`;
         }
         let tagType = "";
-        //未讀標亮
+        // highlight
         if (postedTime[i] > maxTime) {
             maxTime = postedTime[i];
         }
@@ -113,7 +114,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             galleryTitle[i].style.color = "#FF2D2D";
             divs[i].style.background = "#FFFFAA";
         }
-        //低容量警示
+        // low size tag setup
         if (low_size.isOn && filesize[i] / 1048576 / filecount[i] < low_size.size) {
             divs[i].setAttribute("data-uploader", `${i18n.low_size}\n${uploaders[i]}`);
             divs[i].classList.add("low_size");
@@ -126,18 +127,19 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
                 "type": splited_tag_array[splited_tag_array.length - 2],
                 "name": splited_tag_array[splited_tag_array.length - 1]
             };
-            //語言小圖標
+            // language icon
             if (lanIcon[tags[i][j]]) {
                 flaged = true;
                 galleryTitle[i].innerHTML = `<img src='${lanIcon[tags[i][j]]}'>${galleryTitle[i].innerHTML}`;
             }
-            //控制tag種類換行
+            // next line if tag type change
             if (tag.type != tagType && j != 0) {
                 let nextLine = document.createElement("br");
                 tag_fragment.appendChild(nextLine);
             }
             tagType = tag.type;
-            //屏蔽
+            /////////////////////////////
+            /* block gallery function */
             if (!divs[i].classList.contains("rotate-180")) {
                 if (exclude_uploader_list.includes(uploaders[i])) {
                     switchBtn.click();
@@ -161,9 +163,10 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
                     card.appendChild(btn);
                 }
             }
-            //翻譯
+            /////////////////////////////
+            // translate
             tag.name = transSwitch && tData[tag.name] ? tData[tag.name] : tag.name;
-            //創建tag span
+            // add tag span
             const lastSpan = document.createElement("span");
             lastSpan.textContent = tag.name;
             lastSpan.classList.add("tagspan");
@@ -171,7 +174,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             tag_fragment.appendChild(lastSpan);
         }
         tagDisplay.appendChild(tag_fragment);
-        //預設日文圖標
+        // default icon to JP if no language translated tag
         if (!flaged && !tags[i].includes("language:translated")) {
             galleryTitle[i].innerHTML = `<img src='${lanIcon.jp}'> ${galleryTitle[i].innerHTML}`;
         }
@@ -179,7 +182,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
     if (maxTime > readTime) {
         readTime = maxTime;
     }
-    //記憶最後閱讀畫廊之時間
+    // set time
     if (location.href.match("exhentai")) {
         if (minTime < time && readTime > time) {
             chrome.storage.sync.set({
@@ -203,6 +206,6 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             });
         }
     }
-    //移除load
+    //remove loader
     document.getElementById("load").remove();
 }

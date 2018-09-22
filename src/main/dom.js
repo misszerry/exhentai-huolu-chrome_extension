@@ -1,4 +1,4 @@
-// 事件委託
+// event delegrat
 function click_event_delegrat() { // eslint-disable-line no-unused-vars 
     const galleryList = document.querySelector(".ido");
     if (!galleryList) {
@@ -6,7 +6,7 @@ function click_event_delegrat() { // eslint-disable-line no-unused-vars
     }
     galleryList.addEventListener("click", (e) => {
         if (e.target.classList.contains("tagBtn")) {
-            e.preventDefault(); //避免頁面莫名重整 (?)
+            e.preventDefault(); // fix weird reload (?)
             const parent = e.target.parentElement;
             const front = parent.querySelector(".id1");
             const back = parent.querySelector(".tag");

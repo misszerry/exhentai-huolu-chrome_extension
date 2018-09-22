@@ -10,7 +10,8 @@
     },
     "permissions": ["contextMenus","storage","https://exhentai.org/*"],
     "background": {
-        "scripts": ["events.js"]
+        "scripts": ["events.js"],
+        "persistent" : false
     },
     "content_scripts": [
         {

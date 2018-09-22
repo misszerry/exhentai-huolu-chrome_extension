@@ -1,5 +1,5 @@
 /* eslint-disable */
-//tag標籤顏色
+//tag color
 const tagcolors = {
     "language": "red",
     "parody": "#3D7878",
@@ -11,7 +11,7 @@ const tagcolors = {
     "misc": "black",
     "reclass": "#804040"
 };
-//語言Icon
+//language Icon
 const lanIcon = {
     jp: `chrome-extension://${chrome.runtime.id}/res/lanIcon/jp.png`,
     "language:korean": `chrome-extension://${chrome.runtime.id}/res/lanIcon/kr.png`,
@@ -29,7 +29,7 @@ const lanIcon = {
     "language:thai": `chrome-extension://${chrome.runtime.id}/res/lanIcon/thai.png`,
     "language:vietnamese": `chrome-extension://${chrome.runtime.id}/res/lanIcon/vietnam.png`
 };
-//翻譯
+// translate
 const tData={
     "=Age=":"=年齡=",//==========================================
     "age progression":"快速成長",

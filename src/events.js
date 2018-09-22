@@ -1,54 +1,19 @@
-//安裝與更新的初始化
+// initialize data storage
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.contextMenus.create({
-        "title": chrome.i18n.getMessage("context_menu"),
-        "id": "item1",
-        "type": "normal",
-        "contexts": ["link"],
-        "documentUrlPatterns": ["https://exhentai.org/g/*", "https://e-hentai.org/g/*"]
-    });
-    chrome.contextMenus.onClicked.addListener(function (info) {
-        if (info.linkUrl.match("/uploader/")) {
-            const uploader = info.linkUrl.split("/").slice(-1)[0].replace("%2B", " ");
-            chrome.storage.sync.get("Uploaders",
-                (list) => {
-                    let temp = list.Uploaders;
-                    if (temp.includes(uploader)) {
-                        return;
-                    }
-                    temp.push(uploader);
-                    chrome.storage.sync.set({
-                        Uploaders: temp
-                    });
-                });
-        } else if (info.linkUrl.match("/tag/")) {
-            const tag = info.linkUrl.split("/").slice(-1)[0].split("%3A").slice(-1)[0].replace("+", " ");
-            chrome.storage.sync.get("tags",
-                (list) => {
-                    let temp = list.tags;
-                    if (temp.includes(tag)) {
-                        return;
-                    }
-                    temp.push(tag);
-                    chrome.storage.sync.set({
-                        tags: temp
-                    });
-                });
-        }
-    });
     chrome.storage.sync.get(null, (list) => {
 
         let tags = list.tags || [];
         let uploaders = list.Uploaders || [];
 
+        /////////////////////////////////
         // uses obj in the past , change it for old users
-
         if (!Array.isArray(tags)) {
             tags = Object.keys(tags);
         }
         if (!Array.isArray(uploaders)) {
             uploaders = Object.keys(uploaders);
         }
+        /////////////////////////////////
 
 
         const run = list.run || true;
@@ -82,6 +47,47 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 
+// reload extension while update
 chrome.runtime.onUpdateAvailable.addListener(() => {
     chrome.runtime.reload();
+});
+
+// create context menu
+chrome.contextMenus.create({
+    title: chrome.i18n.getMessage("context_menu"),
+    id: "item1",
+    type: "normal",
+    contexts: ["link"],
+    documentUrlPatterns: ["https://exhentai.org/g/*", "https://e-hentai.org/g/*"]
+});
+
+// handle context menu
+chrome.contextMenus.onClicked.addListener(function (info) {
+    if (info.linkUrl.match("/uploader/")) {
+        const uploader = info.linkUrl.split("/").slice(-1)[0].replace("%2B", " ");
+        chrome.storage.sync.get("Uploaders",
+            (list) => {
+                let temp = list.Uploaders;
+                if (temp.includes(uploader)) {
+                    return;
+                }
+                temp.push(uploader);
+                chrome.storage.sync.set({
+                    Uploaders: temp
+                });
+            });
+    } else if (info.linkUrl.match("/tag/")) {
+        const tag = info.linkUrl.split("/").slice(-1)[0].split("%3A").slice(-1)[0].replace("+", " ");
+        chrome.storage.sync.get("tags",
+            (list) => {
+                let temp = list.tags;
+                if (temp.includes(tag)) {
+                    return;
+                }
+                temp.push(tag);
+                chrome.storage.sync.set({
+                    tags: temp
+                });
+            });
+    }
 });

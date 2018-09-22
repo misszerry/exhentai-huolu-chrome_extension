@@ -34,7 +34,7 @@ function getGalleryData(data) { // eslint-disable-line no-unused-vars
         });
     }
 }
-// 取得頁面資料
+// get request data from page
 function getRequestDataFromPage(as) { // eslint-disable-line no-unused-vars 
     const data = [];
     as.forEach((e) => {

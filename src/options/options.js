@@ -12,19 +12,19 @@ const highLight = document.getElementById("highLight");
 const low_size = document.getElementById("low_size");
 const low_size_size = document.getElementById("low_size_size");
 
-//翻譯開關
+// translate switch
 transcheck.onchange = () => {
     chrome.storage.sync.set({
         trans: transcheck.checked
     });
 };
-//標亮開關
+// highlight switch
 highLight.onchange = () => {
     chrome.storage.sync.set({
         highLightSwitch: highLight.checked
     });
 };
-//低容量開關
+// low size tag switch
 low_size.onchange = () => {
     chrome.storage.sync.set({
         low_size: {"isOn":low_size.checked,"size":low_size_size.value}
@@ -35,8 +35,8 @@ low_size_size.onchange = ()=>{
         low_size: {"isOn":low_size.checked,"size":low_size_size.value}
     });
 };
-//開啟頁面的初始化
-function init() {
+// initialize page
+(function init() {
     chrome.storage.sync.get(null, function (list) {
         let tagdis = document.getElementById("stags");
         let Updis = document.getElementById("sUPs");
@@ -56,7 +56,7 @@ function init() {
             text.style.cursor = "pointer";
             Updis.appendChild(text);
         }
-        //設定雙擊刪除
+        // dbclick to remove
         document.getElementById("block-container").addEventListener("dblclick", (e) => {
             if (e.target.classList.contains("tag")) {
                 const text = e.target.textContent;
@@ -87,10 +87,9 @@ function init() {
         low_size.checked = list.low_size.isOn;
         low_size_size.value = list.low_size.size;
     });
-}
-//初始化
-init();
-//新增完全屏蔽tag
+}());
+
+// add block tag
 document.getElementById("confirm-del-tag").onclick = () => {
     let text = document.getElementById("taginput").value;
     chrome.storage.sync.get("tags",
@@ -105,7 +104,8 @@ document.getElementById("confirm-del-tag").onclick = () => {
             });
         });
 };
-//新增完全屏蔽uploader
+
+// add block uploader
 document.getElementById("confirm-del-up").onclick = () => {
     let text = document.getElementById("UPinput").value;
     chrome.storage.sync.get("Uploaders",
@@ -120,7 +120,8 @@ document.getElementById("confirm-del-up").onclick = () => {
             });
         });
 };
-//移除tag
+
+// remove tag
 document.getElementById("removetag").onclick = () => {
     let text = document.getElementById("taginput").value;
     chrome.storage.sync.get("tags",
@@ -136,7 +137,7 @@ document.getElementById("removetag").onclick = () => {
         });
     location.reload();
 };
-//移除uploader
+// remove uploader
 document.getElementById("removeUP").onclick = () => {
     let text = document.getElementById("UPinput").value;
     chrome.storage.sync.get("Uploaders",
@@ -152,7 +153,7 @@ document.getElementById("removeUP").onclick = () => {
         });
     location.reload();
 };
-//初始化按鈕
+// initialize button
 document.getElementById("del").onclick = () => {
     chrome.storage.sync.clear();
     chrome.storage.sync.set({

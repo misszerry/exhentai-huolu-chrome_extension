@@ -13,7 +13,7 @@ elements.forEach((e)=>{
 });
 
 init();
-/* 初始化開關 */
+/* init */
 function init() {
     chrome.storage.sync.get(null,
         (list) => {
@@ -26,7 +26,7 @@ function init() {
         });
 }
 
-/* 開關function */
+/* handle on/off function */
 function opening() {
     open.classList.add("active");
     close.classList.remove("active");
@@ -58,7 +58,7 @@ close.onclick = () => {
     });
     location.reload();
 };
-//進入設定頁面
+//navigate to setting page
 config.onclick = () => {
     if (chrome.runtime.openOptionsPage) { // New way to open options pages, if supported (Chrome 42+).
         chrome.runtime.openOptionsPage();
@@ -75,7 +75,7 @@ chrome.storage.sync.get(null,
             setLastTime.textContent = chrome.i18n.getMessage("popup_update");
         }
     });
-//強制更新時間
+// update saved time manually
 setLastTime.onclick = () => {
     let exReadTime;
     let eReadTime;
