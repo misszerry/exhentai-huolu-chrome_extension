@@ -108,6 +108,23 @@
     padding:3px 2px 2px 3px;
     z-index:-1;
 }
+/* width */
+.tag::-webkit-scrollbar{
+    width:6.5px;
+}
+/* Track */
+.tag::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+}
+/* Handle */
+.tag::-webkit-scrollbar-thumb {
+    background: #7f8fa6;
+}
+
+/* Handle on hover */
+.tag::-webkit-scrollbar-thumb:hover {
+    background: #718093; 
+}
 .tagspan {
     display: inline-block;
     border: 2px solid yellow;
