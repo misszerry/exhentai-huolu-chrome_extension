@@ -1,5 +1,5 @@
-// event delegrat
-function click_event_delegrat() { // eslint-disable-line no-unused-vars 
+// event delegate
+function click_event_delegate() { // eslint-disable-line no-unused-vars 
     const galleryList = document.querySelector(".ido");
     if (!galleryList) {
         return;

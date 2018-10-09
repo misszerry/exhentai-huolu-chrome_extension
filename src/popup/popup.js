@@ -1,7 +1,7 @@
-const open = document.getElementById("open");
-const close = document.getElementById("close");
+const switchBox = document.getElementById("switch-box");
 const setLastTime = document.getElementById("setLastTime");
 const config = document.getElementById("config");
+const symbol = document.getElementById("symbol");
 
 // i18n
 const elements = document.querySelectorAll("[data-i18n]");
@@ -12,52 +12,20 @@ elements.forEach((e)=>{
     }
 });
 
-init();
 /* init */
-function init() {
-    chrome.storage.sync.get(null,
-        (list) => {
-            let temp = list.run;
-            if (temp) {
-                opening();
-            } else {
-                closing();
-            }
-        });
-}
+(function init() {
+    chrome.storage.sync.get("run",({run})=>{
+        switchBox.checked = run;
+    });
+})();
 
 /* handle on/off function */
-function opening() {
-    open.classList.add("active");
-    close.classList.remove("active");
+switchBox.addEventListener("change",function(){
     chrome.storage.sync.set({
-        run: true
+        run: this.checked
     });
-}
+});
 
-function closing() {
-    open.classList.remove("active");
-    close.classList.add("active");
-    chrome.storage.sync.set({
-        run: false
-    });
-}
-open.onclick = () => {
-    open.classList.add("active");
-    close.classList.remove("active");
-    chrome.storage.sync.set({
-        run: true
-    });
-    location.reload();
-};
-close.onclick = () => {
-    open.classList.add("active");
-    close.classList.remove("active");
-    chrome.storage.sync.set({
-        run: false
-    });
-    location.reload();
-};
 //navigate to setting page
 config.onclick = () => {
     if (chrome.runtime.openOptionsPage) { // New way to open options pages, if supported (Chrome 42+).
@@ -69,27 +37,25 @@ config.onclick = () => {
 chrome.storage.sync.get(null,
     (list) => {
         if (list.exReadTime == list.exLastViewTime && list.eReadTime == list.eLastViewTime) {
-            setLastTime.classList.remove("btn-success");
-            setLastTime.classList.add("btn-info");
             setLastTime.disabled="true";
             setLastTime.textContent = chrome.i18n.getMessage("popup_update");
+            setLastTime.classList.remove("item-hover");
+            symbol.style.display = "block";
         }
     });
 // update saved time manually
 setLastTime.onclick = () => {
-    let exReadTime;
-    let eReadTime;
     chrome.storage.sync.get(null,
         (list) => {
-            exReadTime = list.exReadTime;
-            eReadTime = list.eReadTime;
+            const exReadTime = list.exReadTime;
+            const eReadTime = list.eReadTime;
             chrome.storage.sync.set({
                 exLastViewTime: exReadTime,
                 eLastViewTime: eReadTime
             });
             setLastTime.disabled="true";
             setLastTime.textContent = chrome.i18n.getMessage("popup_update");
-            setLastTime.classList.remove("btn-success");
-            setLastTime.classList.add("btn-info");
+            setLastTime.classList.remove("item-hover");
+            symbol.style.display = "block";
         });
 };

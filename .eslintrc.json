@@ -15,7 +15,7 @@
         "lanIcon": false,
         "i18n": false,
         "addLoader": false,
-        "click_event_delegrat": false,
+        "click_event_delegate": false,
         "addCard": false,
         "addTagDisplay": false,
         "addTagSwitch": false,

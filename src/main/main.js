@@ -12,12 +12,14 @@ let exclude_tag_list;
 let exclude_uploader_list;
 const as = document.querySelectorAll("div.id3 a");
 /* main program */
-chrome.runtime.sendMessage({"message": "active"});
+chrome.runtime.sendMessage({
+    "message": "active"
+});
 //全體開關
 chrome.storage.sync.get(null,
     (list) => {
         const run = list.run;
-        // get thie correct time to use
+        // get the correct time to use
         if (location.href.match("exhentai")) {
             time = list.exLastViewTime;
             readTime = list.exReadTime;
@@ -59,11 +61,11 @@ async function init() {
             all_request_data = [];
         }
         const {tags,uploaders,postedTime,filecount,filesize} = await getGalleryData(req_data);
-        gdata.tags = [...gdata.tags,...tags];
-        gdata.uploaders = [...gdata.uploaders,...uploaders];
-        gdata.postedTime = [...gdata.postedTime,...postedTime];
-        gdata.filesize = [...gdata.filesize,...filesize];
-        gdata.filecount = [...gdata.filecount,...filecount];
+        gdata.tags = [...gdata.tags, ...tags];
+        gdata.uploaders = [...gdata.uploaders, ...uploaders];
+        gdata.postedTime = [...gdata.postedTime, ...postedTime];
+        gdata.filesize = [...gdata.filesize, ...filesize];
+        gdata.filecount = [...gdata.filecount, ...filecount];
     }
     // render page
     render(gdata);
@@ -77,7 +79,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
     maxTime = postedTime[0];
     minTime = postedTime[0];
 
-    click_event_delegrat();
+    click_event_delegate();
     // set up display
     for (let i = 0; i < tags.length; i++) {
         // fix checkbox
@@ -86,7 +88,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             checkbox.style.zIndex = 1;
         }
         // language flag icon
-        let flaged = false;
+        let flagged = false;
         // add card as parent div
         const card = addCard(divs[i]);
         // add display to the card back side
@@ -97,18 +99,11 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         // add a switch button
         const switchBtn = addTagSwitch(card);
 
-        // if no tag , add a no_tag tag into display
-        if (tags[i].length === 0) {
-            tagDisplay.innerHTML += `<span class='tagspan'>${i18n.no_tag}</span>`;
-        }
         let tagType = "";
         // highlight
-        if (postedTime[i] > maxTime) {
-            maxTime = postedTime[i];
-        }
-        if (postedTime[i] < minTime) {
-            minTime = postedTime[i];
-        }
+        maxTime = postedTime[i] > maxTime ? postedTime[i] : maxTime;
+        minTime = postedTime[i] < minTime ? postedTime[i] : minTime;
+
         if (highLightSwitch && postedTime[i] > time) {
             as[i].style.color = "#FF2D2D";
             divs[i].style.color = "#FF2D2D";
@@ -122,15 +117,20 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         }
         const tagsCount = tags[i].length;
         const tag_fragment = document.createDocumentFragment();
+        // if no tag , add a no_tag tag into display
+        if (tagsCount === 0) {
+            tagDisplay.innerHTML += `<span class='tagspan'>${i18n.no_tag}</span>`;
+            continue;
+        }
         for (let j = 0; j < tagsCount; j++) {
-            const splited_tag_array = tags[i][j].split(":");
+            const split_tag_array = tags[i][j].split(":");
             const tag = {
-                "type": splited_tag_array[splited_tag_array.length - 2],
-                "name": splited_tag_array[splited_tag_array.length - 1]
+                "type": split_tag_array[split_tag_array.length - 2],
+                "name": split_tag_array[split_tag_array.length - 1]
             };
             // language icon
             if (lanIcon[tags[i][j]]) {
-                flaged = true;
+                flagged = true;
                 galleryTitle[i].innerHTML = `<img src='${lanIcon[tags[i][j]]}'>${galleryTitle[i].innerHTML}`;
             }
             // next line if tag type change
@@ -176,13 +176,11 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         }
         tagDisplay.appendChild(tag_fragment);
         // default icon to JP if no language translated tag
-        if (!flaged && !tags[i].includes("language:translated")) {
+        if (!flagged && !tags[i].includes("language:translated")) {
             galleryTitle[i].innerHTML = `<img src='${lanIcon.jp}'> ${galleryTitle[i].innerHTML}`;
         }
     }
-    if (maxTime > readTime) {
-        readTime = maxTime;
-    }
+    readTime = maxTime > readTime ? maxTime : readTime;
     // set time
     if (location.href.match("exhentai")) {
         if (minTime < time && readTime > time) {
