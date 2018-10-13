@@ -5,22 +5,24 @@ const symbol = document.getElementById("symbol");
 
 // i18n
 const elements = document.querySelectorAll("[data-i18n]");
-elements.forEach((e)=>{
+elements.forEach((e) => {
     const locale_str = chrome.i18n.getMessage(e.dataset.i18n);
-    if(locale_str !== e.innerHTML){
+    if (locale_str !== e.innerHTML) {
         e.innerHTML = locale_str;
     }
 });
 
 /* init */
 (function init() {
-    chrome.storage.sync.get("run",({run})=>{
+    chrome.storage.sync.get("run", ({
+        run
+    }) => {
         switchBox.checked = run;
     });
 })();
 
 /* handle on/off function */
-switchBox.addEventListener("change",function(){
+switchBox.addEventListener("change", function () {
     chrome.storage.sync.set({
         run: this.checked
     });
@@ -34,28 +36,26 @@ config.onclick = () => {
         window.open(chrome.runtime.getURL("options.html"));
     }
 };
-chrome.storage.sync.get(null,
-    (list) => {
-        if (list.exReadTime == list.exLastViewTime && list.eReadTime == list.eLastViewTime) {
-            setLastTime.disabled="true";
-            setLastTime.textContent = chrome.i18n.getMessage("popup_update");
-            setLastTime.classList.remove("item-hover");
-            symbol.style.display = "block";
-        }
-    });
+chrome.storage.sync.get(null, (list) => {
+    if (list.exReadTime == list.exLastViewTime && list.eReadTime == list.eLastViewTime) {
+        setLastTime.disabled = "true";
+        setLastTime.textContent = chrome.i18n.getMessage("popup_update");
+        setLastTime.classList.remove("item-hover");
+        symbol.style.display = "block";
+    }
+});
 // update saved time manually
 setLastTime.onclick = () => {
-    chrome.storage.sync.get(null,
-        (list) => {
-            const exReadTime = list.exReadTime;
-            const eReadTime = list.eReadTime;
-            chrome.storage.sync.set({
-                exLastViewTime: exReadTime,
-                eLastViewTime: eReadTime
-            });
-            setLastTime.disabled="true";
-            setLastTime.textContent = chrome.i18n.getMessage("popup_update");
-            setLastTime.classList.remove("item-hover");
-            symbol.style.display = "block";
+    chrome.storage.sync.get(null, (list) => {
+        const exReadTime = list.exReadTime;
+        const eReadTime = list.eReadTime;
+        chrome.storage.sync.set({
+            exLastViewTime: exReadTime,
+            eLastViewTime: eReadTime
         });
+        setLastTime.disabled = "true";
+        setLastTime.textContent = chrome.i18n.getMessage("popup_update");
+        setLastTime.classList.remove("item-hover");
+        symbol.style.display = "block";
+    });
 };
