@@ -92,7 +92,7 @@ describe("dom.js", () => {
             card = addCard(div);
             addTagDisplay(card);
             switchBtn = addTagSwitch(card);
-            click_event_delegrat();
+            click_event_delegate();
         });
         it("[click 1 on switch] should rotate to back", () => {
             switchBtn.click();
