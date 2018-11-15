@@ -93,8 +93,6 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         const card = addCard(divs[i]);
         // add display to the card back side
         const tagDisplay = addTagDisplay(card);
-        //style
-        tagDisplay.style.maxHeight = parseInt(divs[i].style.height) + 5 + "px";
 
         // add a switch button
         const switchBtn = addTagSwitch(card);
@@ -105,10 +103,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         minTime = postedTime[i] < minTime ? postedTime[i] : minTime;
 
         if (highLightSwitch && postedTime[i] > time) {
-            as[i].style.color = "#FF2D2D";
-            divs[i].style.color = "#FF2D2D";
-            galleryTitle[i].style.color = "#FF2D2D";
-            divs[i].style.background = "#FFFFAA";
+            divs[i].classList.add("highlight");
         }
         // low size tag setup
         if (low_size.isOn && filesize[i] / 1048576 / filecount[i] < low_size.size) {
@@ -130,8 +125,10 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             };
             // language icon
             if (lanIcon[tags[i][j]]) {
+                const flagImage = document.createElement("img");
+                flagImage.setAttribute("src",lanIcon[tags[i][j]]);
                 flagged = true;
-                galleryTitle[i].innerHTML = `<img src='${lanIcon[tags[i][j]]}'>${galleryTitle[i].innerHTML}`;
+                galleryTitle[i].insertAdjacentElement("afterbegin",flagImage);
             }
             // next line if tag type change
             if (tag.type != tagType && j != 0) {
@@ -177,7 +174,9 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         tagDisplay.appendChild(tag_fragment);
         // default icon to JP if no language translated tag
         if (!flagged && !tags[i].includes("language:translated")) {
-            galleryTitle[i].innerHTML = `<img src='${lanIcon.jp}'> ${galleryTitle[i].innerHTML}`;
+            const flagImage = document.createElement("img");
+            flagImage.setAttribute("src",lanIcon.jp);
+            galleryTitle[i].insertAdjacentElement("afterbegin",flagImage);
         }
     }
     readTime = maxTime > readTime ? maxTime : readTime;
