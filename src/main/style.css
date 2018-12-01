@@ -116,6 +116,7 @@
     backface-visibility: hidden;
     transition: all .5s;
     height: 335px;
+    padding:4px;
 }
 /* width */
 .tag::-webkit-scrollbar{
