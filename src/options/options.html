@@ -27,35 +27,69 @@
                 <li>
                     <input id="low_size" type="checkbox" checked>
                     <label for="low_size" data-i18n="options_low">Low file size warning : lower than
-                        <input type="text" id="low_size_size" class="text_input" style="font-size:1.5rem;width:3rem;"> (mb) per page</label>
+                        <input type="text" id="low_size_size" class="text_input" style="font-size:1.5rem;width:3rem;">
+                        (mb) per page</label>
                 </li>
             </ul>
         </div>
         <div class="setting_item">
             <h2 class="title" data-i18n="options_block_title">Block Settings</h2>
-            <p style="font-size: 1.3rem" data-i18n="options_block_note">Double click to remove</p>
             <div class="container" id="block-container">
-                <div class="box">
-                    <h2>Tags</h2>
-                    <form>
-                        <input id="taginput" type="text" placeholder="Tag" class="text_input">
-                        <br>
-                        <button id="confirm-del-tag" type="submit" class="btn btn_blue" style="cursor: pointer" data-i18n="options_block_block">block</button>
-                        <button id="removetag" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
-                    </form>
-                    <h4 data-i18n="options_block_taglist">blocked tags</h4>
-                    <div id="stags"></div>
+                <div class="col-box">
+                    <h1>Blacklist</h1>
+                    <hr>
+                    <div class="row-box">
+                        <div class="box">
+                            <h2>Tags</h2>
+                            <form>
+                                <input id="taginput" type="text" placeholder="Tag" class="text_input">
+                                <br>
+                                <button id="confirm-del-tag" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_block">block</button>
+                                <button id="removetag" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="stags" class="list-display"></div>
+                        </div>
+                        <div class="box">
+                            <h2>Uploaders</h2>
+                            <form>
+                                <input id="UPinput" type="text" placeholder="Uploader" class="text_input">
+                                <br>
+                                <button id="confirm-del-up" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_block">block</button>
+                                <button id="removeUP" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="sUPs" class="list-display"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="box">
-                    <h2>Uploaders</h2>
-                    <form>
-                        <input id="UPinput" type="text" placeholder="Uploader" class="text_input">
-                        <br>
-                        <button id="confirm-del-up" type="submit" class="btn btn_blue" style="cursor: pointer" data-i18n="options_block_block">block</button>
-                        <button id="removeUP" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
-                    </form>
-                    <h4 data-i18n="options_block_ullist">blocked uploaders</h4>
-                    <div id="sUPs"></div>
+                <div class="col-box">
+                    <h1>Whitelist</h1>
+                    <hr>
+                    <div class="row-box">
+                        <div class="box">
+                            <h2>Tags</h2>
+                            <form>
+                                <input id="whitelist-tag-input" type="text" placeholder="Tag" class="text_input">
+                                <br>
+                                <button id="whitelist-tag-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_block">block</button>
+                                <button id="whitelist-tag-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="whitelist-tag-display" class="list-display"></div>
+                        </div>
+                        <div class="box">
+                            <h2>Uploaders</h2>
+                            <form>
+                                <input id="whitelist-uploader-input" type="text" placeholder="Uploader" class="text_input">
+                                <br>
+                                <button id="whitelist-uploader-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_block">block</button>
+                                <button id="whitelist-uploader-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="whitelist-uploader-display" class="list-display"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
