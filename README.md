@@ -25,12 +25,16 @@ Highlight the gallery that you havn't read before.
 **Please click the button while first visit after installed this extension.**   
 **安裝後首次進入e/exhentai時，請按手動同步**
 ## Hide galleries | 屏蔽功能
-You can set excluded tags or uploader in the setting page.   
+##### blacklist
+You can set excluded tags or uploader here.   
 The extension will hide galleries with these tags or uploader.   
 e-hentai also provides Exclude Uploaders setting. (settings - Excluded Uploaders)   
-可在設定頁面設定要屏蔽的標籤 / 上傳者   
+可在黑名單設定要屏蔽的標籤 / 上傳者   
 擴充功能將直接隱藏含有屏蔽標籤或上傳者的漫畫   
 e-hentai官方另有內建的屏蔽上傳者功能，請多多利用 (settings - Excluded Uploaders)
+##### whitelist
+Tags or uploaders added in whitelist will not be blocked.    
+畫廊含有在白名單中的 標籤 / 上傳者 則不會被屏蔽
 ## Tag display | 標籤顯示
 Display the tags of the gallery at the searching area.   
 Click the display button to display.  
