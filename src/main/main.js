@@ -10,6 +10,8 @@ let maxTime;
 let minTime;
 let exclude_tag_list;
 let exclude_uploader_list;
+let white_tag_list;
+let white_uploader_list;
 const as = document.querySelectorAll("div.id3 a");
 /* main program */
 chrome.runtime.sendMessage({
@@ -32,6 +34,8 @@ chrome.storage.sync.get(null,
             highLightSwitch = list.highLightSwitch;
             exclude_tag_list = list.tags;
             exclude_uploader_list = list.uploaders;
+            white_tag_list = list["whitelist-tags"];
+            white_uploader_list = list["whitelist-uploaders"];
             low_size = list.low_size;
             init();
         }
@@ -82,6 +86,13 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
     click_event_delegate();
     // set up display
     for (let i = 0; i < tags.length; i++) {
+        // check if in whitelist
+        const isWhiteTag = tags[i].filter((tag)=>{
+            const split_tag_array = tag.split(":");
+            return white_tag_list.includes(split_tag_array[split_tag_array.length - 1]);
+        }).length > 0;
+        const isWhiteUploader = uploaders.filter((uploader)=>white_uploader_list.includes(uploader)).length > 0;
+        const isWhite = isWhiteTag || isWhiteUploader;
         // fix checkbox
         const checkbox = divs[i].querySelector("[name='modifygids[]']");
         if (checkbox) {
@@ -138,7 +149,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             tagType = tag.type;
             /////////////////////////////
             /* block gallery function */
-            if (!divs[i].classList.contains("rotate-180")) {
+            if (!isWhite && !divs[i].classList.contains("rotate-180")) {
                 if (exclude_uploader_list.includes(uploaders[i])) {
                     switchBtn.click();
 
