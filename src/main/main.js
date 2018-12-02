@@ -31,7 +31,7 @@ chrome.storage.sync.get(null,
             transSwitch = list.trans;
             highLightSwitch = list.highLightSwitch;
             exclude_tag_list = list.tags;
-            exclude_uploader_list = list.Uploaders;
+            exclude_uploader_list = list.uploaders;
             low_size = list.low_size;
             init();
         }
