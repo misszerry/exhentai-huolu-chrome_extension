@@ -97,6 +97,7 @@ p {
     background-color: #60a3bc;
     border: 1px solid #2d3436;
     margin: .5rem;
+    position: relative;
 }
 
 .whitelist-uploaders,
@@ -104,6 +105,7 @@ p {
     background-color: #b2bec3;
     border: 1px solid #2d3436;
     margin: .5rem;
+    position: relative;
 }
 
 .whitelist-tags:hover,
@@ -189,4 +191,19 @@ hr{
     /* fix hr corrupted in flex box */
     margin-left: 0;
     margin-right: 0;
+}
+
+.remove-button{
+    position: absolute;
+    top:0;
+    left: 0;
+    align-self: flex-end;
+    border: none;
+    color:#fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.remove-button:hover{
+    color:#d63031;
 }

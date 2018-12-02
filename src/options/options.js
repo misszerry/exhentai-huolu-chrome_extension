@@ -68,22 +68,16 @@ low_size_size.onchange = () => {
 }());
 
 // dbclick to remove
-document.getElementById("block-container").addEventListener("dblclick", (e) => {
-    if (e.target.classList.contains("tags")) {
-        remove_storage(e.target, "tags");
-    } else if (e.target.classList.contains("uploaders")) {
-        remove_storage(e.target, "uploaders");
-    } else if (e.target.classList.contains("whitelist-tags")) {
-        remove_storage(e.target, "whitelist-tags");
-    } else if (e.target.classList.contains("whitelist-uploaders")) {
-        remove_storage(e.target, "whitelist-uploaders");
+document.getElementById("block-container").addEventListener("click", (e) => {
+    if(e.target.classList.contains("remove-button")){
+        remove_storage(e.target);
     }
 });
 
 /* Blacklist */
 
 // add block tag
-document.getElementById("blacklist-tag-confirm").onclick = () => {
+document.getElementById("blacklist-tag-form").onsubmit = () => {
     let text = document.getElementById("blacklist-tag-input").value;
     chrome.storage.sync.get("tags",
         (list) => {
@@ -99,7 +93,7 @@ document.getElementById("blacklist-tag-confirm").onclick = () => {
 };
 
 // add block uploader
-document.getElementById("blacklist-uploader-confirm").onclick = () => {
+document.getElementById("blacklist-uploader-form").onsubmit = () => {
     let text = document.getElementById("blacklist-uploader-input").value;
     chrome.storage.sync.get("uploaders",
         (list) => {
@@ -150,7 +144,7 @@ document.getElementById("blacklist-uploader-remove").onclick = () => {
 /* Whitelist */
 
 // add whitelist tag
-document.getElementById("whitelist-tag-confirm").onclick = () => {
+document.getElementById("whitelist-tag-form").onsubmit = () => {
     let text = document.getElementById("whitelist-tag-input").value;
     chrome.storage.sync.get("whitelist-tags",
         (list) => {
@@ -166,7 +160,7 @@ document.getElementById("whitelist-tag-confirm").onclick = () => {
 };
 
 // add whitelist uploader
-document.getElementById("whitelist-uploader-confirm").onclick = () => {
+document.getElementById("whitelist-uploader-form").onsubmit = () => {
     let text = document.getElementById("whitelist-uploader-input").value;
     chrome.storage.sync.get("whitelist-uploaders",
         (list) => {
@@ -242,12 +236,22 @@ function render_list(type,content,list_element) {
     let text = document.createElement("p");
     text.textContent = content;
     text.className = type;
-    text.style.cursor = "pointer";
+
+    // remove button
+    const remove_button = document.createElement("button");
+    remove_button.innerHTML = "&#x2716;";
+    remove_button.classList.add("remove-button");
+    remove_button.setAttribute("data-content",content);
+    remove_button.setAttribute("data-type",type);
+
+    text.appendChild(remove_button);
+
     list_element.appendChild(text);
 }
 
-function remove_storage(target, type) {
-    const text = target.textContent;
+function remove_storage(target) {
+    const text = target.dataset.content;
+    const type = target.dataset.type;
     chrome.storage.sync.get(type,
         (list) => {
             let temp = list[type];
@@ -256,5 +260,5 @@ function remove_storage(target, type) {
                 [type]: temp
             });
         });
-    target.remove();
+    target.parentElement.remove();
 }
