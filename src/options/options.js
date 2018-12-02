@@ -44,8 +44,8 @@ low_size_size.onchange = () => {
 // initialize page
 (function init() {
     chrome.storage.sync.get(null, function (list) {
-        const tag_dis = document.getElementById("stags");
-        const up_dis = document.getElementById("sUPs");
+        const tag_dis = document.getElementById("blacklist-tag-display");
+        const up_dis = document.getElementById("blacklist-uploader-display");
         const whitelist_tag_dis = document.getElementById("whitelist-tag-display");
         const whitelist_uploader_dis = document.getElementById("whitelist-uploader-display");
         for (let i = 0; i < list.tags.length; i++) {
@@ -83,8 +83,8 @@ document.getElementById("block-container").addEventListener("dblclick", (e) => {
 /* Blacklist */
 
 // add block tag
-document.getElementById("confirm-del-tag").onclick = () => {
-    let text = document.getElementById("taginput").value;
+document.getElementById("blacklist-tag-confirm").onclick = () => {
+    let text = document.getElementById("blacklist-tag-input").value;
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
@@ -99,8 +99,8 @@ document.getElementById("confirm-del-tag").onclick = () => {
 };
 
 // add block uploader
-document.getElementById("confirm-del-up").onclick = () => {
-    let text = document.getElementById("UPinput").value;
+document.getElementById("blacklist-uploader-confirm").onclick = () => {
+    let text = document.getElementById("blacklist-uploader-input").value;
     chrome.storage.sync.get("uploaders",
         (list) => {
             let temp = list.uploaders;
@@ -115,8 +115,8 @@ document.getElementById("confirm-del-up").onclick = () => {
 };
 
 // remove tag
-document.getElementById("removetag").onclick = () => {
-    let text = document.getElementById("taginput").value;
+document.getElementById("blacklist-tag-remove").onclick = () => {
+    let text = document.getElementById("blacklist-tag-input").value;
     chrome.storage.sync.get("tags",
         (list) => {
             let temp = list.tags;
@@ -131,8 +131,8 @@ document.getElementById("removetag").onclick = () => {
     location.reload();
 };
 // remove uploader
-document.getElementById("removeUP").onclick = () => {
-    let text = document.getElementById("UPinput").value;
+document.getElementById("blacklist-uploader-remove").onclick = () => {
+    let text = document.getElementById("blacklist-uploader-input").value;
     chrome.storage.sync.get("uploaders",
         (list) => {
             let temp = list.uploaders;
@@ -215,7 +215,7 @@ document.getElementById("whitelist-uploader-remove").onclick = () => {
 };
 
 // initialize button
-document.getElementById("del").onclick = () => {
+document.getElementById("init_btn").onclick = () => {
     chrome.storage.sync.clear();
     chrome.storage.sync.set({
         "tags": [],

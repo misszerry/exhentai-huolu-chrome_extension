@@ -11,7 +11,7 @@
     <h1 style="margin:0">
         <img src="../res/LOGO_NOB.png">
     </h1>
-    <button id="del" style="cursor: pointer" class="btn" data-i18n="options_init">Initialize</button>
+    <button id="init_btn" style="cursor: pointer" class="btn" data-i18n="options_init">Initialize</button>
     <div class="setting_container">
         <div class="setting_item">
             <h2 class="title" data-i18n="options_selections">Selections</h2>
@@ -42,24 +42,24 @@
                         <div class="box">
                             <h2>Tags</h2>
                             <form>
-                                <input id="taginput" type="text" placeholder="Tag" class="text_input">
+                                <input id="blacklist-tag-input" type="text" placeholder="Tag" class="text_input">
                                 <br>
-                                <button id="confirm-del-tag" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                <button id="blacklist-tag-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
                                     data-i18n="options_block_block">block</button>
-                                <button id="removetag" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                                <button id="blacklist-tag-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
                             </form>
-                            <div id="stags" class="list-display"></div>
+                            <div id="blacklist-tag-display" class="list-display"></div>
                         </div>
                         <div class="box">
                             <h2>Uploaders</h2>
                             <form>
-                                <input id="UPinput" type="text" placeholder="Uploader" class="text_input">
+                                <input id="blacklist-uploader-input" type="text" placeholder="Uploader" class="text_input">
                                 <br>
-                                <button id="confirm-del-up" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                <button id="blacklist-uploader-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
                                     data-i18n="options_block_block">block</button>
-                                <button id="removeUP" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                                <button id="blacklist-uploader-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
                             </form>
-                            <div id="sUPs" class="list-display"></div>
+                            <div id="blacklist-uploader-display" class="list-display"></div>
                         </div>
                     </div>
                 </div>

@@ -50,13 +50,13 @@ p {
     padding: .5rem;
 }
 
-#del {
+#init_btn {
     display: block;
     width: 100px;
     margin: auto;
     text-align: center;
 }
-#del:hover{
+#init_btn:hover{
     background-color: #dfe6e9;
 }
 
