@@ -9,6 +9,7 @@ const clone = require('gulp-clone');
 const clean = require('gulp-clean');
 const zip = require('gulp-zip');
 const eslint = require('gulp-eslint');
+const iife = require("gulp-iife");
 
 //eslint
 gulp.task('eslint', function () {
@@ -60,6 +61,11 @@ gulp.task('main-js', function () {
     return gulp.src('src/main/*.js')
         .pipe(concat('main.js'))
         .pipe(uglify())
+        .pipe(iife(
+            {
+                trimCode: true
+            }
+        ))
         .pipe(gulp.dest('dist/main'));
 });
 
