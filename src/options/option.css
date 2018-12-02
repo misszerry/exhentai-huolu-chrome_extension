@@ -92,23 +92,27 @@ p {
     border: 1px solid red;
 }
 
-.tag {
+.whitelist-tags,
+.tags {
     background-color: #60a3bc;
     border: 1px solid #2d3436;
     margin: .5rem;
 }
 
-.uploader {
+.whitelist-uploaders,
+.uploaders {
     background-color: #b2bec3;
     border: 1px solid #2d3436;
     margin: .5rem;
 }
 
-.tag:hover {
+.whitelist-tags:hover,
+.tags:hover {
     background-color: #82ccdd;
 }
 
-.uploader:hover {
+.whitelist-uploaders:hover,
+.uploaders:hover {
     background-color: #dfe6e9;
 }
 

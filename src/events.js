@@ -3,7 +3,9 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.get(null, (list) => {
 
         let tags = list.tags || [];
-        let uploaders = list.Uploaders || [];
+        let uploaders = list.uploaders || list.Uploaders || [];
+        let whitelistTags = list["whitelist-tags"] || [];
+        let whitelistUploaders = list["whitelist-uploaders"] || [];
 
         /////////////////////////////////
         // uses obj in the past , change it for old users
@@ -14,6 +16,10 @@ chrome.runtime.onInstalled.addListener(() => {
             uploaders = Object.keys(uploaders);
         }
         /////////////////////////////////
+
+        if(Object.keys(list).includes("Uploaders")){
+            chrome.storage.sync.remove("Uploaders",()=>{});
+        }
 
 
         const run = list.run || true;
@@ -33,7 +39,9 @@ chrome.runtime.onInstalled.addListener(() => {
         };
         chrome.storage.sync.set({
             "tags": tags,
-            "Uploaders": uploaders,
+            "uploaders": uploaders,
+            "whitelist-tags":whitelistTags,
+            "whitelist-uploaders":whitelistUploaders,
             "run": run,
             "loca": loca,
             "trans": trans,
@@ -67,15 +75,15 @@ chrome.contextMenus.removeAll(()=>{
 chrome.contextMenus.onClicked.addListener(function (info) {
     if (info.linkUrl.match("/uploader/")) {
         const uploader = info.linkUrl.split("/").slice(-1)[0].replace("%2B", " ");
-        chrome.storage.sync.get("Uploaders",
+        chrome.storage.sync.get("uploaders",
             (list) => {
-                let temp = list.Uploaders;
+                let temp = list.uploaders;
                 if (temp.includes(uploader)) {
                     return;
                 }
                 temp.push(uploader);
                 chrome.storage.sync.set({
-                    Uploaders: temp
+                    uploaders: temp
                 });
             });
     } else if (info.linkUrl.match("/tag/")) {
