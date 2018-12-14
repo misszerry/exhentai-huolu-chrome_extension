@@ -1,0 +1,39 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "webextensions": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "globals": {
+        "tagcolors": false,
+        "tData": false,
+        "lanIcon": false,
+        "i18n": false,
+        "addLoader": false,
+        "click_event_delegate": false,
+        "addCard": false,
+        "addTagDisplay": false,
+        "addTagSwitch": false,
+        "getGalleryData":false,
+        "getRequestDataFromPage":false
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "linebreak-style": ["error", "windows"],
+        "quotes": ["error", "double"],
+        "semi": ["error", "always"],
+        "block-scoped-var": "error",
+        "no-shadow-restricted-names": "error",
+        "no-var": "error",
+        "dot-notation": "warn",
+        "no-shadow": "warn",
+        "no-lonely-if": "warn",
+        "arrow-body-style": ["warn", "as-needed"],
+        "arrow-parens": ["warn", "always"]
+    }
+}

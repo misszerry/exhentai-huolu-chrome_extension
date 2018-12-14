@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mocha</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mocha.css" />
+</head>
+
+<body>
+  <!-- 測試用DOM -->
+  <div style="display: none" id="test_html">
+    <!-- Exhentai DOM-->
+    <div class="ido">
+      <div class="itg">
+        <div class="id1">
+          <div class="id2"><a href="https://exhentai.org/g/1278614/21fce30d27/">(C94) [パニックルーム! (凪居ユキ)] とろとろシグニット
+              (アズールレーン)</a></div>
+          <div class="id3"><a href="https://exhentai.org/g/1278614/21fce30d27/"><img src="https://exhentai.org/t/ec/46/ec466e3350a1204874d9bcde289cdb27850ee549-178791-1059-1511-jpg_l.jpg"
+                alt="Free Hentai Doujinshi Gallery (C94) [パニックルーム! (凪居ユキ)] とろとろシグニット (アズールレーン)" title="(C94) [パニックルーム! (凪居ユキ)] とろとろシグニット (アズールレーン)"
+                style="position:relative; top:-3px"></a></div>
+          <div class="id4">
+            <div class="id41"></div>
+            <div class="id42"></div>
+            <div class="id43"></div>
+            <div class="id44"></div>
+          </div>
+        </div>
+        <div class="id1">
+          <div class="id2"><a href="https://exhentai.org/g/1278613/c392836a54/">[しんきゃら (YO-JIN)] アイギス輪辱大戦 (千年戦争アイギス)
+              [DL版]</a></div>
+          <div class="id3"><a href="https://exhentai.org/g/1278613/c392836a54/"><img src="https://exhentai.org/t/2e/ec/2eecb7082eeaf1b7bdfff77adf97b28fd506696e-337446-1200-1707-jpg_l.jpg"
+                alt="Free Hentai Doujinshi Gallery [しんきゃら (YO-JIN)] アイギス輪辱大戦 (千年戦争アイギス) [DL版]" title="[しんきゃら (YO-JIN)] アイギス輪辱大戦 (千年戦争アイギス) [DL版]"
+                style="position:relative; top:-2px"></a></div>
+          <div class="id4">
+            <div class="id41"></div>
+            <div class="id42"></div>
+            <div class="id43"></div>
+            <div class="id44"></div>
+          </div>
+        </div>
+        <div class="id1">
+          <div class="id2"><a href="https://exhentai.org/g/1278612/d889468646/">(C94) [釣りキチ同盟 (梅玉奈部)]
+              あ♥尻は。気持ちよすぎ♥…もっとぉ♥
+              (ゴールデンカムイ)</a></div>
+          <div class="id3"><a href="https://exhentai.org/g/1278612/d889468646/"><img src="https://exhentai.org/t/fa/5b/fa5b0c4264c9271596bd97b5276c3d241ea304d2-229467-1052-1512-jpg_l.jpg"
+                alt="Free Hentai Doujinshi Gallery (C94) [釣りキチ同盟 (梅玉奈部)] あ♥尻は。気持ちよすぎ♥…もっとぉ♥ (ゴールデンカムイ)" title="(C94) [釣りキチ同盟 (梅玉奈部)] あ♥尻は。気持ちよすぎ♥…もっとぉ♥ (ゴールデンカムイ)"
+                style="position:relative; top:-4px"></a></div>
+          <div class="id4">
+            <div class="id41"></div>
+            <div class="id42"></div>
+            <div class="id43"></div>
+            <div class="id44"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- options dom-->
+  </div>
+  <div id="mocha"></div>
+  <script src='chai.js'></script>
+  <script src='chai-dom.js'></script>
+  <script src="mocha.js"></script>
+  <script>
+    mocha.setup('bdd');
+  </script>
+  <!-- 待測試檔案 -->
+  <script src="../src/main/dom.js"></script>
+  <script src="../src/main/utils.js"></script>
+  <!-- 測試檔案 -->
+  <script src="tests.js"></script>
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>

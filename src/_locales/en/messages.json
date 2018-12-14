@@ -1,0 +1,37 @@
+{
+    "title":{"message":"E/ExHentai Huolu tools"},
+    "description":{"message":"Tags display / language icon / Block tags/uploaders and more features"},
+
+    "popup_update_update":{"message":"set as read"},
+    "popup_update":{"message":"up to date"},
+    "popup_manual":{"message":"Manual"},
+    "popup_settings":{"message":"Settings"},
+    "popup_version":{"message":"version:1.77"},
+
+    "manual_header":{"message":"Huolu Manual"},
+    "manual_back":{"message":"back"},
+    "manual_title":{"message":"Manual"},
+    "manual_note":{"message":"Please set your exhentai to Thumbnails View mode"},
+    "manual_content":{"message":"<h2 style='border-top:0;'>Tag Display</h2><p>It will run automatically <br>click the button to switch on/off the tag display</p><h2>Tag translate</h2><p>Translate the tags to chinese.</p><h2>Highlight new gallery</h2><p>Highlight the gallery that you havn't read before.Please click the update button while first visit after installed this extension.</p><h2>Block Tags/Uploaders</h2><p>Block gallerys that contains tags/uploaders you set. <br><br> note 1:Please set pure tag<br>example: Set 'chinese' instead of 'language:chinese'<br><br> note 2:Theres a built-in uploader exclude setiing in exhentai</p><h2>language icon</h2><p>Note : Exhentai set the gallery without language tag to be japanese. <br>some western gellery will be with japanese icon<br></p><h2>low file size notice</h2><p>set lower than ?(mb) per page<br>the program will add a tag on the gallery to notify users.</p>"},
+
+    "options_header":{"message":"Huolu Settings"},
+    "options_init":{"message":"Initialize"},
+    "options_selections":{"message":"Selections"},
+    "options_translate":{"message":"Tag chinese translate"},
+    "options_highlight":{"message":"HighLight new gallery"},
+    "options_low":{"message":"Low file size warning : lower than <input type='text' id='low_size_size' class='text_input' style='font-size:1.5rem;width:3rem;'> (mb) per page"},
+    "options_block_title":{"message":"Block Settings"},
+    "options_block_add":{"message":"add"},
+    "options_block_remove":{"message":"remove"},
+    "options_block_taglist":{"message":"blocked tags"},
+    "options_block_ullist":{"message":"blocked uploaders"},
+
+    "no_tag":{"message":"No tag"},
+    "show_tag":{"message":"show tag"},
+    "close_tag":{"message":"back"},
+    "loading":{"message":"Huolu loading..."},
+    "block_warning":{"message":"Blocked ! "},
+    "block_confirm":{"message":""},
+    "context_menu":{"message":"block this tag/uploader"},
+    "low_size":{"message":"Low file size"}
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title data-i18n="options_header">Huolu Settings</title>
+    <link rel="stylesheet" href="option.css">
+</head>
+
+<body>
+    <h1 style="margin:0">
+        <img src="../res/LOGO_NOB.png">
+    </h1>
+    <button id="init_btn" style="cursor: pointer" class="btn" data-i18n="options_init">Initialize</button>
+    <div class="setting_container">
+        <div class="setting_item">
+            <h2 class="title" data-i18n="options_selections">Selections</h2>
+            <ul class="selection">
+                <li>
+                    <input id="trans" type="checkbox">
+                    <label for="trans" data-i18n="options_translate">Tag chinese translate</label>
+                </li>
+                <li>
+                    <input id="highLight" type="checkbox" checked>
+                    <label for="highLight" data-i18n="options_highlight">HighLight new gallery</label>
+                </li>
+                <li>
+                    <input id="low_size" type="checkbox" checked>
+                    <label for="low_size" data-i18n="options_low">Low file size warning : lower than
+                        <input type="text" id="low_size_size" class="text_input" style="font-size:1.5rem;width:3rem;">
+                        (mb) per page</label>
+                </li>
+            </ul>
+        </div>
+        <div class="setting_item">
+            <h2 class="title" data-i18n="options_block_title">Block Settings</h2>
+            <div class="container" id="block-container">
+                <div class="col-box">
+                    <h1>Blacklist</h1>
+                    <hr>
+                    <div class="row-box">
+                        <div class="box">
+                            <h2>Tags</h2>
+                            <form id="blacklist-tag-form" autocomplete="off">
+                                <input id="blacklist-tag-input" type="text" placeholder="Tag" class="text_input" required="required">
+                                <br>
+                                <button id="blacklist-tag-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_add">add</button>
+                                <button id="blacklist-tag-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="blacklist-tag-display" class="list-display"></div>
+                        </div>
+                        <div class="box">
+                            <h2>Uploaders</h2>
+                            <form id="blacklist-uploader-form" autocomplete="off">
+                                <input id="blacklist-uploader-input" type="text" placeholder="Uploader" class="text_input" required="required">
+                                <br>
+                                <button id="blacklist-uploader-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_add">add</button>
+                                <button id="blacklist-uploader-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="blacklist-uploader-display" class="list-display"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-box">
+                    <h1>Whitelist</h1>
+                    <hr>
+                    <div class="row-box">
+                        <div class="box">
+                            <h2>Tags</h2>
+                            <form id="whitelist-tag-form" autocomplete="off">
+                                <input id="whitelist-tag-input" type="text" placeholder="Tag" class="text_input" required="required">
+                                <br>
+                                <button id="whitelist-tag-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_add">add</button>
+                                <button id="whitelist-tag-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="whitelist-tag-display" class="list-display"></div>
+                        </div>
+                        <div class="box">
+                            <h2>Uploaders</h2>
+                            <form id="whitelist-uploader-form" autocomplete="off">
+                                <input id="whitelist-uploader-input" type="text" placeholder="Uploader" class="text_input" required="required">
+                                <br>
+                                <button id="whitelist-uploader-confirm" type="submit" class="btn btn_blue" style="cursor: pointer"
+                                    data-i18n="options_block_add">add</button>
+                                <button id="whitelist-uploader-remove" style="cursor: pointer" class="btn btn_red" data-i18n="options_block_remove">remove</button>
+                            </form>
+                            <div id="whitelist-uploader-display" class="list-display"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="options.js"></script>
+
+</html>

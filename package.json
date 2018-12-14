@@ -1,0 +1,37 @@
+{
+  "name": "exhentaihuolu",
+  "version": "1.0.0",
+  "description": "A chrome extension for e-hentai/exhentai.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gulp eslint",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chuang861012/exhentai-huolu-chrome_extension.git"
+  },
+  "author": "chuang861012",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chuang861012/exhentai-huolu-chrome_extension/issues"
+  },
+  "homepage": "https://github.com/chuang861012/exhentai-huolu-chrome_extension#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-clone": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-iife": "^0.4.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-zip": "^4.2.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {}
+}
