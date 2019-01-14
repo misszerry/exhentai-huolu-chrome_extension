@@ -6,7 +6,7 @@
     "popup_update":{"message":"up to date"},
     "popup_manual":{"message":"Manual"},
     "popup_settings":{"message":"Settings"},
-    "popup_version":{"message":"version:1.77"},
+    "popup_version":{"message":"version:1.78"},
 
     "manual_header":{"message":"Huolu Manual"},
     "manual_back":{"message":"back"},

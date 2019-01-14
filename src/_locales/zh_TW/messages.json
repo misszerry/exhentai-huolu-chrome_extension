@@ -6,7 +6,7 @@
     "popup_update":{"message":"已同步"},
     "popup_manual":{"message":"使用說明"},
     "popup_settings":{"message":"設定"},
-    "popup_version":{"message":"目前版本:1.77"},
+    "popup_version":{"message":"目前版本:1.78"},
 
     "manual_header":{"message":"活路套件 | 使用說明"},
     "manual_back":{"message":"回上一頁"},

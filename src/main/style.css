@@ -8,6 +8,9 @@
 .id2 > a{
     color:inherit;
 }
+.fontColor-fix:hover{
+    color:#9B4E03;
+}
 .card {
     display: inline-block;
     position: relative;

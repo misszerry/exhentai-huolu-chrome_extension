@@ -6,8 +6,6 @@ let low_size; //低容量警示標籤開關
 /* data fields */
 let time; // 歷史讀到的最新時間 time saved in storage
 let readTime; // 本頁最新時間 time of this page
-let maxTime;
-let minTime;
 let exclude_tag_list;
 let exclude_uploader_list;
 let white_tag_list;
@@ -64,7 +62,7 @@ async function init() {
             req_data = all_request_data;
             all_request_data = [];
         }
-        const {tags,uploaders,postedTime,filecount,filesize} = await getGalleryData(req_data);
+        const { tags, uploaders, postedTime, filecount, filesize } = await getGalleryData(req_data);
         gdata.tags = [...gdata.tags, ...tags];
         gdata.uploaders = [...gdata.uploaders, ...uploaders];
         gdata.postedTime = [...gdata.postedTime, ...postedTime];
@@ -76,22 +74,22 @@ async function init() {
 }
 
 //render
-function render({tags,uploaders,postedTime,filecount,filesize}) {
+function render({ tags, uploaders, postedTime, filecount, filesize }) {
     const divs = document.querySelectorAll("div.id1");
     const galleryTitle = document.querySelectorAll("div.id2 a");
 
-    maxTime = postedTime[0];
-    minTime = postedTime[0];
+    let maxTime = Math.max(...postedTime);
+    let minTime = maxTime;
 
     click_event_delegate();
     // set up display
     for (let i = 0; i < tags.length; i++) {
         // check if in whitelist
-        const isWhiteTag = tags[i].filter((tag)=>{
+        const isWhiteTag = tags[i].filter((tag) => {
             const split_tag_array = tag.split(":");
             return white_tag_list.includes(split_tag_array[split_tag_array.length - 1]);
         }).length > 0;
-        const isWhiteUploader = uploaders.filter((uploader)=>white_uploader_list.includes(uploader)).length > 0;
+        const isWhiteUploader = uploaders.filter((uploader) => white_uploader_list.includes(uploader)).length > 0;
         const isWhite = isWhiteTag || isWhiteUploader;
         // fix checkbox
         const checkbox = divs[i].querySelector("[name='modifygids[]']");
@@ -100,6 +98,16 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         }
         // language flag icon
         let flagged = false;
+        // highlight
+        maxTime = postedTime[i] > maxTime ? postedTime[i] : maxTime;
+        minTime = postedTime[i] < minTime ? postedTime[i] : minTime;
+
+        if (highLightSwitch && postedTime[i] > time && divs[i].parentElement.id !== "pp") {
+            divs[i].classList.add("highlight");
+            if(location.href.match("exhentai")){
+                galleryTitle[i].classList.add("fontColor-fix");
+            }
+        }
         // add card as parent div
         const card = addCard(divs[i]);
         // add display to the card back side
@@ -109,13 +117,7 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         const switchBtn = addTagSwitch(card);
 
         let tagType = "";
-        // highlight
-        maxTime = postedTime[i] > maxTime ? postedTime[i] : maxTime;
-        minTime = postedTime[i] < minTime ? postedTime[i] : minTime;
-
-        if (highLightSwitch && postedTime[i] > time) {
-            divs[i].classList.add("highlight");
-        }
+        
         // low size tag setup
         if (low_size.isOn && filesize[i] / 1048576 / filecount[i] < low_size.size) {
             divs[i].setAttribute("data-uploader", `${i18n.low_size}\n${uploaders[i]}`);
@@ -137,9 +139,9 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
             // language icon
             if (lanIcon[tags[i][j]]) {
                 const flagImage = document.createElement("img");
-                flagImage.setAttribute("src",lanIcon[tags[i][j]]);
+                flagImage.setAttribute("src", lanIcon[tags[i][j]]);
                 flagged = true;
-                galleryTitle[i].insertAdjacentElement("afterbegin",flagImage);
+                galleryTitle[i].insertAdjacentElement("afterbegin", flagImage);
             }
             // next line if tag type change
             if (tag.type != tagType && j != 0) {
@@ -186,8 +188,8 @@ function render({tags,uploaders,postedTime,filecount,filesize}) {
         // default icon to JP if no language translated tag
         if (!flagged && !tags[i].includes("language:translated")) {
             const flagImage = document.createElement("img");
-            flagImage.setAttribute("src",lanIcon.jp);
-            galleryTitle[i].insertAdjacentElement("afterbegin",flagImage);
+            flagImage.setAttribute("src", lanIcon.jp);
+            galleryTitle[i].insertAdjacentElement("afterbegin", flagImage);
         }
     }
     readTime = maxTime > readTime ? maxTime : readTime;
